@@ -62,9 +62,6 @@ rule-providers:
 | Bing_domain | domain | Proxy | Bing |
 | OneDrive_domain | domain | Proxy | OneDrive |
 | Microsoft_domain | domain | Proxy | Microsoft |
-| Xbox_domain | domain | Proxy | Xbox |
-| ChinaMedia_domain / ChinaMedia_ipcidr | domain+ipcidr | DIRECT | BiliBili |
-| NetEaseMusic_domain / NetEaseMusic_ipcidr | domain+ipcidr | DIRECT | 网易音乐 |
 | ChinaDomain_domain | domain | DIRECT | 国内域名 |
 | Telegram_domain / Telegram_ipcidr | domain+ipcidr | Proxy | Telegram |
 | TelegramCIDR_ipcidr | ipcidr | Proxy | Telegram IP |

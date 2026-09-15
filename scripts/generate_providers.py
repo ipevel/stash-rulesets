@@ -112,10 +112,7 @@ SOURCES = [
     (BM7.format(cat="Bing", file="Bing.yaml"), "Bing", "Proxy"),
     (BM7.format(cat="OneDrive", file="OneDrive.yaml"), "OneDrive", "Proxy"),
     (BM7.format(cat="Microsoft", file="Microsoft.yaml"), "Microsoft", "Proxy"),
-    (BM7.format(cat="Xbox", file="Xbox.yaml"), "Xbox", "Proxy"),
-    # --- 国内 ---
-    (BM7.format(cat="BiliBili", file="BiliBili.yaml"), "ChinaMedia", "DIRECT"),
-    (BM7.format(cat="NetEaseMusic", file="NetEaseMusic.yaml"), "NetEaseMusic", "DIRECT"),
+    # --- 国内 (不含游戏平台/哔哩哔哩/网易云音乐) ---
     (BM7.format(cat="China", file="China_Domain.yaml"), "ChinaDomain", "DIRECT"),
     # --- Telegram / GFW ---
     (BM7.format(cat="Telegram", file="Telegram.yaml"), "Telegram", "Proxy"),

@@ -137,22 +137,6 @@ proxy-groups:
       - 🚀 节点选择
       - 🎯 全球直连
 
-  - name: 🎮 游戏平台
-    type: select
-    proxies:
-      - 🚀 节点选择
-      - 🎯 全球直连
-
-  - name: 📺 哔哩哔哩
-    type: select
-    proxies:
-      - 🎯 全球直连
-
-  - name: 🎵 网易音乐
-    type: select
-    proxies:
-      - 🎯 全球直连
-
   # --- 工具分组 ---
   - name: 🎯 全球直连
     type: select
@@ -318,42 +302,7 @@ rule-providers:
     path: ./ruleset/microsoft.yaml
     interval: 86400
 
-  xbox:
-    type: http
-    behavior: domain
-    url: "https://fastly.jsdelivr.net/gh/ipevel/stash-rulesets@main/stash/providers/Xbox_domain.yaml"
-    path: ./ruleset/xbox.yaml
-    interval: 86400
-
   # === 国内 ===
-  chinamedia:
-    type: http
-    behavior: domain
-    url: "https://fastly.jsdelivr.net/gh/ipevel/stash-rulesets@main/stash/providers/ChinaMedia_domain.yaml"
-    path: ./ruleset/chinamedia.yaml
-    interval: 86400
-
-  chinamedia-ip:
-    type: http
-    behavior: ipcidr
-    url: "https://fastly.jsdelivr.net/gh/ipevel/stash-rulesets@main/stash/providers/ChinaMedia_ipcidr.yaml"
-    path: ./ruleset/chinamedia-ip.yaml
-    interval: 86400
-
-  neteasemusic:
-    type: http
-    behavior: domain
-    url: "https://fastly.jsdelivr.net/gh/ipevel/stash-rulesets@main/stash/providers/NetEaseMusic_domain.yaml"
-    path: ./ruleset/neteasemusic.yaml
-    interval: 86400
-
-  neteasemusic-ip:
-    type: http
-    behavior: ipcidr
-    url: "https://fastly.jsdelivr.net/gh/ipevel/stash-rulesets@main/stash/providers/NetEaseMusic_ipcidr.yaml"
-    path: ./ruleset/neteasemusic-ip.yaml
-    interval: 86400
-
   chinadomain:
     type: http
     behavior: domain
@@ -488,14 +437,7 @@ rules:
   - DOMAIN-SUFFIX,bing.com,🖥️ 微软服务
   - RULE-SET,microsoft,🖥️ 微软服务
 
-  # === Gaming ===
-  - RULE-SET,xbox,🎮 游戏平台
-
   # === 中国直连 ===
-  - RULE-SET,chinamedia,📺 哔哩哔哩
-  - RULE-SET,chinamedia-ip,📺 哔哩哔哩,no-resolve
-  - RULE-SET,neteasemusic,🎵 网易音乐
-  - RULE-SET,neteasemusic-ip,🎵 网易音乐,no-resolve
   - RULE-SET,chinadomain,🎯 全球直连
   - DOMAIN-SUFFIX,cn,🎯 全球直连
   - GEOIP,CN,🎯 全球直连
