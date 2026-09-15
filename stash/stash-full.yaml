@@ -310,6 +310,13 @@ rule-providers:
     path: ./ruleset/chinadomain.yaml
     interval: 86400
 
+  chinaip:
+    type: http
+    behavior: ipcidr
+    url: "https://fastly.jsdelivr.net/gh/ipevel/stash-rulesets@main/stash/providers/ChinaIp_ipcidr.yaml"
+    path: ./ruleset/chinaip.yaml
+    interval: 86400
+
   # === Telegram / GFW ===
   telegram:
     type: http
@@ -439,6 +446,7 @@ rules:
 
   # === 中国直连 ===
   - RULE-SET,chinadomain,🎯 全球直连
+  - RULE-SET,chinaip,🎯 全球直连,no-resolve
   - DOMAIN-SUFFIX,cn,🎯 全球直连
   - GEOIP,CN,🎯 全球直连
 

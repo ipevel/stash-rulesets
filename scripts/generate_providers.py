@@ -114,6 +114,7 @@ SOURCES = [
     (BM7.format(cat="Microsoft", file="Microsoft.yaml"), "Microsoft", "Proxy"),
     # --- 国内 (不含游戏平台/哔哩哔哩/网易云音乐) ---
     (BM7.format(cat="China", file="China_Domain.yaml"), "ChinaDomain", "DIRECT"),
+    (LOYO.format(file="cncidr.txt"), "ChinaIp", "DIRECT"),
     # --- Telegram / GFW ---
     (BM7.format(cat="Telegram", file="Telegram.yaml"), "Telegram", "Proxy"),
     (LOYO.format(file="gfw.txt"), "ProxyGFWlist", "Proxy"),

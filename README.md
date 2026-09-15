@@ -63,6 +63,7 @@ rule-providers:
 | OneDrive_domain | domain | Proxy | OneDrive |
 | Microsoft_domain | domain | Proxy | Microsoft |
 | ChinaDomain_domain | domain | DIRECT | 国内域名 |
+| ChinaIp_ipcidr | ipcidr | DIRECT | 国内 IP (9647 条) |
 | Telegram_domain / Telegram_ipcidr | domain+ipcidr | Proxy | Telegram |
 | TelegramCIDR_ipcidr | ipcidr | Proxy | Telegram IP |
 | ProxyGFWlist_domain | domain | Proxy | GFW 列表 |
