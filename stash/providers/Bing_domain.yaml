@@ -1,0 +1,11 @@
+# Bing_domain.yaml - 9 rules
+payload:
+  - +.bing.com
+  - +.bing.com.cn
+  - +.bing.net
+  - +.bingads.com
+  - +.bingagencyawards.com
+  - +.bingapistatistics.com
+  - +.bingsandbox.com
+  - +.bingvisualsearch.com
+  - +.bingworld.com

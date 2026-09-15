@@ -1,0 +1,507 @@
+# Stash 完整规则配置
+# 基于 https://stash.wiki/ 规范生成
+# 规则集: stash/providers/*.yaml (behavior: domain / ipcidr)
+# 使用: 在 Stash 中导入此配置, 在 proxies: 填入你的节点
+
+mode: rule
+log-level: info
+
+# --- DNS (Stash 推荐 1-2 个国内 DNS) ---
+dns:
+  enable: true
+  ipv6: false
+  default-nameserver:
+    - 223.5.5.5
+    - 119.29.29.29
+  enhanced-mode: fake-ip
+  fake-ip-range: 198.18.0.1/16
+  nameserver:
+    - https://doh.pub/dns-query
+    - https://dns.alidns.com/dns-query
+  fallback:
+    - https://dns.cloudflare.com/dns-query
+    - https://dns.google/dns-query
+  fallback-filter:
+    geoip: true
+    geoip-code: CN
+    ipcidr:
+      - 0.0.0.0/8
+      - 10.0.0.0/8
+      - 100.64.0.0/10
+      - 127.0.0.0/8
+      - 169.254.0.0/16
+      - 172.16.0.0/12
+      - 192.168.0.0/16
+      - 224.0.0.0/4
+      - 240.0.0.0/4
+  fake-ip-filter:
+    - "*.lan"
+    - "*.local"
+    - "*.localhost"
+    - "*.test"
+    - "*.stun.*.*"
+    - "*.stun.*.*.*"
+    - "*.stun.*.*.*.*"
+    - "lens.l.google.com"
+    - "*.srv.nintendo.net"
+    - "*.stun.playstation.net"
+    - "xbox.*.*.microsoft.com"
+    - "*.*.xboxlive.com"
+    - "*.msftncsi.com"
+    - "*.msftconnecttest.com"
+
+proxies:
+
+proxy-groups:
+  - name: 🚀 节点选择
+    type: select
+    proxies:
+      - DIRECT
+
+  # --- 应用分组 ---
+  - name: 📲 电报消息
+    type: select
+    proxies:
+      - 🚀 节点选择
+      - 🎯 全球直连
+
+  - name: 💬 Ai平台
+    type: select
+    proxies:
+      - 🚀 节点选择
+      - 🎯 全球直连
+
+  - name: 📹 油管视频
+    type: select
+    proxies:
+      - 🚀 节点选择
+      - 🎯 全球直连
+
+  - name: 🏷️ TikTok
+    type: select
+    proxies:
+      - 🚀 节点选择
+      - 🎯 全球直连
+
+  - name: 📸 Instagram
+    type: select
+    proxies:
+      - 🚀 节点选择
+      - 🎯 全球直连
+
+  - name: 🎥 奈飞视频
+    type: select
+    proxies:
+      - 🚀 节点选择
+      - 🎯 全球直连
+
+  - name: 🔍 Google
+    type: select
+    proxies:
+      - 🚀 节点选择
+      - 🎯 全球直连
+
+  - name: 🔔 Google FCM
+    type: select
+    proxies:
+      - 🚀 节点选择
+      - 🎯 全球直连
+
+  - name: 🍎 苹果服务
+    type: select
+    proxies:
+      - 🚀 节点选择
+      - 🎯 全球直连
+
+  - name: 🧑‍💻 GitHub
+    type: select
+    proxies:
+      - 🚀 节点选择
+      - 🎯 全球直连
+
+  - name: 🔎 微软 Bing
+    type: select
+    proxies:
+      - 🚀 节点选择
+      - 🎯 全球直连
+
+  - name: ☁️ 微软云盘
+    type: select
+    proxies:
+      - 🚀 节点选择
+      - 🎯 全球直连
+
+  - name: 🖥️ 微软服务
+    type: select
+    proxies:
+      - 🚀 节点选择
+      - 🎯 全球直连
+
+  - name: 🎮 游戏平台
+    type: select
+    proxies:
+      - 🚀 节点选择
+      - 🎯 全球直连
+
+  - name: 📺 哔哩哔哩
+    type: select
+    proxies:
+      - 🎯 全球直连
+
+  - name: 🎵 网易音乐
+    type: select
+    proxies:
+      - 🎯 全球直连
+
+  # --- 工具分组 ---
+  - name: 🎯 全球直连
+    type: select
+    proxies:
+      - DIRECT
+      - 🚀 节点选择
+
+  - name: 🛑 全球拦截
+    type: select
+    proxies:
+      - REJECT
+      - DIRECT
+
+  - name: 🐟 漏网之鱼
+    type: select
+    proxies:
+      - 🚀 节点选择
+      - 🎯 全球直连
+
+# --- 规则集定义 ---
+rule-providers:
+  # === 广告 ===
+  banad:
+    type: http
+    behavior: domain
+    url: "https://fastly.jsdelivr.net/gh/ipevel/stash-rulesets@main/stash/providers/BanAD_domain.yaml"
+    path: ./ruleset/banad.yaml
+    interval: 86400
+
+  banadcompany:
+    type: http
+    behavior: ipcidr
+    url: "https://fastly.jsdelivr.net/gh/ipevel/stash-rulesets@main/stash/providers/BanADCompany_ipcidr.yaml"
+    path: ./ruleset/banadcompany.yaml
+    interval: 86400
+
+  # === AI ===
+  openai:
+    type: http
+    behavior: domain
+    url: "https://fastly.jsdelivr.net/gh/ipevel/stash-rulesets@main/stash/providers/OpenAI_domain.yaml"
+    path: ./ruleset/openai.yaml
+    interval: 86400
+
+  openai-ip:
+    type: http
+    behavior: ipcidr
+    url: "https://fastly.jsdelivr.net/gh/ipevel/stash-rulesets@main/stash/providers/OpenAI_ipcidr.yaml"
+    path: ./ruleset/openai-ip.yaml
+    interval: 86400
+
+  claude:
+    type: http
+    behavior: domain
+    url: "https://fastly.jsdelivr.net/gh/ipevel/stash-rulesets@main/stash/providers/Claude_domain.yaml"
+    path: ./ruleset/claude.yaml
+    interval: 86400
+
+  googlegemini:
+    type: http
+    behavior: domain
+    url: "https://fastly.jsdelivr.net/gh/ipevel/stash-rulesets@main/stash/providers/GoogleGemini_domain.yaml"
+    path: ./ruleset/googlegemini.yaml
+    interval: 86400
+
+  # === 流媒体 & 社交 ===
+  proxymedia:
+    type: http
+    behavior: domain
+    url: "https://fastly.jsdelivr.net/gh/ipevel/stash-rulesets@main/stash/providers/ProxyMedia_domain.yaml"
+    path: ./ruleset/proxymedia.yaml
+    interval: 86400
+
+  proxymedia-ip:
+    type: http
+    behavior: ipcidr
+    url: "https://fastly.jsdelivr.net/gh/ipevel/stash-rulesets@main/stash/providers/ProxyMedia_ipcidr.yaml"
+    path: ./ruleset/proxymedia-ip.yaml
+    interval: 86400
+
+  tiktok:
+    type: http
+    behavior: domain
+    url: "https://fastly.jsdelivr.net/gh/ipevel/stash-rulesets@main/stash/providers/TikTok_domain.yaml"
+    path: ./ruleset/tiktok.yaml
+    interval: 86400
+
+  instagram:
+    type: http
+    behavior: domain
+    url: "https://fastly.jsdelivr.net/gh/ipevel/stash-rulesets@main/stash/providers/Instagram_domain.yaml"
+    path: ./ruleset/instagram.yaml
+    interval: 86400
+
+  netflix:
+    type: http
+    behavior: domain
+    url: "https://fastly.jsdelivr.net/gh/ipevel/stash-rulesets@main/stash/providers/Netflix_domain.yaml"
+    path: ./ruleset/netflix.yaml
+    interval: 86400
+
+  # === Google / Apple / GitHub / 微软 ===
+  google:
+    type: http
+    behavior: domain
+    url: "https://fastly.jsdelivr.net/gh/ipevel/stash-rulesets@main/stash/providers/Google_domain.yaml"
+    path: ./ruleset/google.yaml
+    interval: 86400
+
+  google-ip:
+    type: http
+    behavior: ipcidr
+    url: "https://fastly.jsdelivr.net/gh/ipevel/stash-rulesets@main/stash/providers/Google_ipcidr.yaml"
+    path: ./ruleset/google-ip.yaml
+    interval: 86400
+
+  googlefcm:
+    type: http
+    behavior: domain
+    url: "https://fastly.jsdelivr.net/gh/ipevel/stash-rulesets@main/stash/providers/GoogleFCM_domain.yaml"
+    path: ./ruleset/googlefcm.yaml
+    interval: 86400
+
+  googlefcm-ip:
+    type: http
+    behavior: ipcidr
+    url: "https://fastly.jsdelivr.net/gh/ipevel/stash-rulesets@main/stash/providers/GoogleFCM_ipcidr.yaml"
+    path: ./ruleset/googlefcm-ip.yaml
+    interval: 86400
+
+  apple:
+    type: http
+    behavior: ipcidr
+    url: "https://fastly.jsdelivr.net/gh/ipevel/stash-rulesets@main/stash/providers/Apple_ipcidr.yaml"
+    path: ./ruleset/apple.yaml
+    interval: 86400
+
+  github:
+    type: http
+    behavior: domain
+    url: "https://fastly.jsdelivr.net/gh/ipevel/stash-rulesets@main/stash/providers/GitHub_domain.yaml"
+    path: ./ruleset/github.yaml
+    interval: 86400
+
+  bing:
+    type: http
+    behavior: domain
+    url: "https://fastly.jsdelivr.net/gh/ipevel/stash-rulesets@main/stash/providers/Bing_domain.yaml"
+    path: ./ruleset/bing.yaml
+    interval: 86400
+
+  onedrive:
+    type: http
+    behavior: domain
+    url: "https://fastly.jsdelivr.net/gh/ipevel/stash-rulesets@main/stash/providers/OneDrive_domain.yaml"
+    path: ./ruleset/onedrive.yaml
+    interval: 86400
+
+  microsoft:
+    type: http
+    behavior: domain
+    url: "https://fastly.jsdelivr.net/gh/ipevel/stash-rulesets@main/stash/providers/Microsoft_domain.yaml"
+    path: ./ruleset/microsoft.yaml
+    interval: 86400
+
+  xbox:
+    type: http
+    behavior: domain
+    url: "https://fastly.jsdelivr.net/gh/ipevel/stash-rulesets@main/stash/providers/Xbox_domain.yaml"
+    path: ./ruleset/xbox.yaml
+    interval: 86400
+
+  # === 国内 ===
+  chinamedia:
+    type: http
+    behavior: domain
+    url: "https://fastly.jsdelivr.net/gh/ipevel/stash-rulesets@main/stash/providers/ChinaMedia_domain.yaml"
+    path: ./ruleset/chinamedia.yaml
+    interval: 86400
+
+  chinamedia-ip:
+    type: http
+    behavior: ipcidr
+    url: "https://fastly.jsdelivr.net/gh/ipevel/stash-rulesets@main/stash/providers/ChinaMedia_ipcidr.yaml"
+    path: ./ruleset/chinamedia-ip.yaml
+    interval: 86400
+
+  neteasemusic:
+    type: http
+    behavior: domain
+    url: "https://fastly.jsdelivr.net/gh/ipevel/stash-rulesets@main/stash/providers/NetEaseMusic_domain.yaml"
+    path: ./ruleset/neteasemusic.yaml
+    interval: 86400
+
+  neteasemusic-ip:
+    type: http
+    behavior: ipcidr
+    url: "https://fastly.jsdelivr.net/gh/ipevel/stash-rulesets@main/stash/providers/NetEaseMusic_ipcidr.yaml"
+    path: ./ruleset/neteasemusic-ip.yaml
+    interval: 86400
+
+  chinadomain:
+    type: http
+    behavior: domain
+    url: "https://fastly.jsdelivr.net/gh/ipevel/stash-rulesets@main/stash/providers/ChinaDomain_domain.yaml"
+    path: ./ruleset/chinadomain.yaml
+    interval: 86400
+
+  # === Telegram / GFW ===
+  telegram:
+    type: http
+    behavior: domain
+    url: "https://fastly.jsdelivr.net/gh/ipevel/stash-rulesets@main/stash/providers/Telegram_domain.yaml"
+    path: ./ruleset/telegram.yaml
+    interval: 86400
+
+  telegram-ip:
+    type: http
+    behavior: ipcidr
+    url: "https://fastly.jsdelivr.net/gh/ipevel/stash-rulesets@main/stash/providers/Telegram_ipcidr.yaml"
+    path: ./ruleset/telegram-ip.yaml
+    interval: 86400
+
+  telegramcidr:
+    type: http
+    behavior: ipcidr
+    url: "https://fastly.jsdelivr.net/gh/ipevel/stash-rulesets@main/stash/providers/TelegramCIDR_ipcidr.yaml"
+    path: ./ruleset/telegramcidr.yaml
+    interval: 86400
+
+  gfwlist:
+    type: http
+    behavior: domain
+    url: "https://fastly.jsdelivr.net/gh/ipevel/stash-rulesets@main/stash/providers/ProxyGFWlist_domain.yaml"
+    path: ./ruleset/gfwlist.yaml
+    interval: 86400
+
+# --- 分流规则 ---
+rules:
+  # === 本地网络直连 ===
+  - DOMAIN-SUFFIX,local,🎯 全球直连
+  - IP-CIDR,127.0.0.0/8,🎯 全球直连,no-resolve
+  - IP-CIDR,192.168.0.0/16,🎯 全球直连,no-resolve
+  - IP-CIDR,10.0.0.0/8,🎯 全球直连,no-resolve
+  - IP-CIDR,172.16.0.0/12,🎯 全球直连,no-resolve
+
+  # === 广告拦截 ===
+  - RULE-SET,banad,🛑 全球拦截
+  - RULE-SET,banadcompany,🛑 全球拦截
+
+  # === AI平台 (内联关键词先匹配, RULE-SET兜底) ===
+  - DOMAIN-KEYWORD,openai,💬 Ai平台
+  - DOMAIN-KEYWORD,chatgpt,💬 Ai平台
+  - DOMAIN-KEYWORD,claude,💬 Ai平台
+  - DOMAIN-KEYWORD,anthropic,💬 Ai平台
+  - DOMAIN-KEYWORD,gemini,💬 Ai平台
+  - DOMAIN-SUFFIX,chatgpt.com,💬 Ai平台
+  - DOMAIN-SUFFIX,claude.ai,💬 Ai平台
+  - DOMAIN-SUFFIX,openai.com,💬 Ai平台
+  - DOMAIN-SUFFIX,anthropic.com,💬 Ai平台
+  - DOMAIN-SUFFIX,copilot.microsoft.com,💬 Ai平台
+  - RULE-SET,openai,💬 Ai平台
+  - RULE-SET,openai-ip,💬 Ai平台,no-resolve
+  - RULE-SET,claude,💬 Ai平台
+  - RULE-SET,googlegemini,💬 Ai平台
+
+  # === 流媒体 (内联关键词先匹配, RULE-SET兜底) ===
+  - DOMAIN-KEYWORD,youtube,📹 油管视频
+  - DOMAIN-KEYWORD,googlevideo,📹 油管视频
+  - DOMAIN-SUFFIX,youtube.com,📹 油管视频
+  - DOMAIN-SUFFIX,youtu.be,📹 油管视频
+  - DOMAIN-KEYWORD,netflix,🎥 奈飞视频
+  - DOMAIN-SUFFIX,nflxvideo.net,🎥 奈飞视频
+  - DOMAIN-KEYWORD,tiktok,🏷️ TikTok
+  - DOMAIN-SUFFIX,tiktok.com,🏷️ TikTok
+  - DOMAIN-KEYWORD,instagram,📸 Instagram
+  - DOMAIN-SUFFIX,instagram.com,📸 Instagram
+  - RULE-SET,proxymedia,📹 油管视频
+  - RULE-SET,proxymedia-ip,📹 油管视频,no-resolve
+  - RULE-SET,netflix,🎥 奈飞视频
+  - RULE-SET,tiktok,🏷️ TikTok
+  - RULE-SET,instagram,📸 Instagram
+
+  # === Telegram ===
+  - DOMAIN-KEYWORD,telegram,📲 电报消息
+  - DOMAIN-SUFFIX,t.me,📲 电报消息
+  - DOMAIN-SUFFIX,telegram.org,📲 电报消息
+  - RULE-SET,telegram,📲 电报消息
+  - RULE-SET,telegram-ip,📲 电报消息,no-resolve
+  - RULE-SET,telegramcidr,📲 电报消息,no-resolve
+
+  # === Google ===
+  - RULE-SET,google,🔍 Google
+  - RULE-SET,google-ip,🔍 Google,no-resolve
+  - RULE-SET,googlefcm,🔔 Google FCM
+  - RULE-SET,googlefcm-ip,🔔 Google FCM,no-resolve
+
+  # === Apple ===
+  - RULE-SET,apple,🍎 苹果服务,no-resolve
+
+  # === GitHub ===
+  - DOMAIN-KEYWORD,github,🧑‍💻 GitHub
+  - DOMAIN-SUFFIX,github.com,🧑‍💻 GitHub
+  - RULE-SET,github,🧑‍💻 GitHub
+
+  # === Microsoft ===
+  - RULE-SET,bing,🔎 微软 Bing
+  - DOMAIN-KEYWORD,1drv,☁️ 微软云盘
+  - DOMAIN-KEYWORD,onedrive,☁️ 微软云盘
+  - DOMAIN-KEYWORD,skydrive,☁️ 微软云盘
+  - DOMAIN-SUFFIX,livefilestore.com,☁️ 微软云盘
+  - DOMAIN-SUFFIX,oneclient.sfx.ms,☁️ 微软云盘
+  - DOMAIN-SUFFIX,onedrive.com,☁️ 微软云盘
+  - DOMAIN-SUFFIX,onedrive.live.com,☁️ 微软云盘
+  - DOMAIN-SUFFIX,photos.live.com,☁️ 微软云盘
+  - DOMAIN-SUFFIX,sharepoint.com,☁️ 微软云盘
+  - DOMAIN-SUFFIX,sharepointonline.com,☁️ 微软云盘
+  - DOMAIN-SUFFIX,skydrive.wns.windows.com,☁️ 微软云盘
+  - DOMAIN-SUFFIX,spoprod-a.akamaihd.net,☁️ 微软云盘
+  - DOMAIN-SUFFIX,storage.live.com,☁️ 微软云盘
+  - DOMAIN-SUFFIX,storage.msn.com,☁️ 微软云盘
+  - DOMAIN-SUFFIX,microsoftpersonalcontent.com,☁️ 微软云盘
+  - RULE-SET,onedrive,☁️ 微软云盘
+  - DOMAIN-SUFFIX,hotmail.com,🖥️ 微软服务
+  - DOMAIN-SUFFIX,live.com,🖥️ 微软服务
+  - DOMAIN-SUFFIX,msn.com,🖥️ 微软服务
+  - DOMAIN-SUFFIX,office.com,🖥️ 微软服务
+  - DOMAIN-SUFFIX,office.net,🖥️ 微软服务
+  - DOMAIN-SUFFIX,microsoft.com,🖥️ 微软服务
+  - DOMAIN-SUFFIX,azure.com,🖥️ 微软服务
+  - DOMAIN-SUFFIX,microsoftonline.com,🖥️ 微软服务
+  - DOMAIN-SUFFIX,windows.net,🖥️ 微软服务
+  - DOMAIN-SUFFIX,bing.com,🖥️ 微软服务
+  - RULE-SET,microsoft,🖥️ 微软服务
+
+  # === Gaming ===
+  - RULE-SET,xbox,🎮 游戏平台
+
+  # === 中国直连 ===
+  - RULE-SET,chinamedia,📺 哔哩哔哩
+  - RULE-SET,chinamedia-ip,📺 哔哩哔哩,no-resolve
+  - RULE-SET,neteasemusic,🎵 网易音乐
+  - RULE-SET,neteasemusic-ip,🎵 网易音乐,no-resolve
+  - RULE-SET,chinadomain,🎯 全球直连
+  - DOMAIN-SUFFIX,cn,🎯 全球直连
+  - GEOIP,CN,🎯 全球直连
+
+  # === GFWlist 兜底 ===
+  - RULE-SET,gfwlist,🚀 节点选择
+
+  # === 最终兜底 ===
+  - MATCH,🐟 漏网之鱼

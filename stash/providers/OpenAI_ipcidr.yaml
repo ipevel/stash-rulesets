@@ -1,0 +1,4 @@
+# OpenAI_ipcidr.yaml - 2 rules
+payload:
+  - 24.199.123.28/32
+  - 64.23.132.171/32

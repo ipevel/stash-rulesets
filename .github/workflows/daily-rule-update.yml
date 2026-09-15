@@ -1,0 +1,71 @@
+name: Daily Rule Update
+
+on:
+  schedule:
+    # 每天 UTC 02:00 = 北京时间 10:00
+    - cron: "0 2 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update-rules:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Generate providers
+        run: |
+          python3 scripts/generate_providers.py
+
+      - name: Validate YAML
+        run: |
+          pip install pyyaml
+          python3 - <<'EOF'
+          import yaml, glob, sys
+          ok = True
+          for f in glob.glob("stash/providers/*.yaml"):
+              try:
+                  d = yaml.safe_load(open(f))
+                  assert isinstance(d, dict) and "payload" in d
+                  # domain 文件: 只能裸域名/通配符
+                  if "_domain.yaml" in f:
+                      for e in d["payload"]:
+                          assert not e.startswith(("DOMAIN-", "IP-", "PROCESS-")), f"bad domain entry: {e}"
+                  # ipcidr 文件: 只能裸 CIDR
+                  if "_ipcidr.yaml" in f:
+                      for e in d["payload"]:
+                          assert "/" in e, f"bad ipcidr entry: {e}"
+              except Exception as e:
+                  print(f"FAIL {f}: {e}")
+                  ok = False
+          try:
+              d = yaml.safe_load(open("stash/stash-full.yaml"))
+              assert len(d.get("rule-providers", {})) >= 20
+          except Exception as e:
+              print(f"FAIL template: {e}")
+              ok = False
+          print("YAML validation:", "OK" if ok else "FAILED")
+          sys.exit(0 if ok else 1)
+
+      - name: Commit and push if changed
+        run: |
+          git config user.name "stash-rulesets-bot"
+          git config user.email "ipevel@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "No changes detected"
+          else
+            git commit -m "chore: daily rule update $(date -u +%Y-%m-%d)"
+            git push origin main
+            echo "Pushed updates"
+          fi

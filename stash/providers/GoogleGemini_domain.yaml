@@ -1,0 +1,12 @@
+# GoogleGemini_domain.yaml - 10 rules
+payload:
+  - ai.google.dev
+  - alkalimakersuite-pa.clients6.google.com
+  - makersuite.google.com
+  - +.bard.google.com
+  - +.deepmind.com
+  - +.deepmind.google
+  - +.gemini.google.com
+  - +.generativeai.google
+  - +.proactivebackend-pa.googleapis.com
+  - +.apis.google.com
