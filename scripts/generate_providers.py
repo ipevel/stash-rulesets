@@ -58,7 +58,11 @@ def split_items(items):
         head = parts[0].upper()
         val = parts[1].strip() if len(parts) > 1 else item
         if head == "DOMAIN":
-            domains.append(val)
+            # 二次校验: DOMAIN,IP 形式 (上游异常) 归 ipcidr, 避免污染 domain provider
+            if re.match(r"^\d{1,3}(\.\d{1,3}){3}(/\d{1,2})?$", val) or re.match(r"^[0-9a-fA-F:]+/\d{1,3}$", val):
+                ipcidrs.append(val)
+            else:
+                domains.append(val)
         elif head == "DOMAIN-SUFFIX":
             domains.append(f"+.{val}")
         elif head == "DOMAIN-WILDCARD":
@@ -150,6 +154,8 @@ def main():
         import json
         json.dump(all_keywords, f, ensure_ascii=False, indent=1)
     print("keywords.json 已保存")
+    if any(r.startswith("FAIL") for r in results):
+        sys.exit(1)
 
 if __name__ == "__main__":
     main()

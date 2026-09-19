@@ -58,6 +58,7 @@ jobs:
           sys.exit(0 if ok else 1)
 
       - name: Commit and push if changed
+        if: github.ref == 'refs/heads/main'
         run: |
           git config user.name "stash-rulesets-bot"
           git config user.email "ipevel@users.noreply.github.com"

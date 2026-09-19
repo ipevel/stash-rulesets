@@ -162,14 +162,14 @@ rule-providers:
   banad:
     type: http
     behavior: domain
-    url: "https://fastly.jsdelivr.net/gh/ipevel/stash-rulesets@main/stash/providers/BanAD_domain.yaml"
+    url: "https://cdn.jsdelivr.net/gh/ipevel/stash-rulesets@main/stash/providers/BanAD_domain.yaml"
     path: ./ruleset/banad.yaml
     interval: 86400
 
   banadcompany:
     type: http
     behavior: ipcidr
-    url: "https://fastly.jsdelivr.net/gh/ipevel/stash-rulesets@main/stash/providers/BanADCompany_ipcidr.yaml"
+    url: "https://cdn.jsdelivr.net/gh/ipevel/stash-rulesets@main/stash/providers/BanADCompany_ipcidr.yaml"
     path: ./ruleset/banadcompany.yaml
     interval: 86400
 
@@ -177,28 +177,28 @@ rule-providers:
   openai:
     type: http
     behavior: domain
-    url: "https://fastly.jsdelivr.net/gh/ipevel/stash-rulesets@main/stash/providers/OpenAI_domain.yaml"
+    url: "https://cdn.jsdelivr.net/gh/ipevel/stash-rulesets@main/stash/providers/OpenAI_domain.yaml"
     path: ./ruleset/openai.yaml
     interval: 86400
 
   openai-ip:
     type: http
     behavior: ipcidr
-    url: "https://fastly.jsdelivr.net/gh/ipevel/stash-rulesets@main/stash/providers/OpenAI_ipcidr.yaml"
+    url: "https://cdn.jsdelivr.net/gh/ipevel/stash-rulesets@main/stash/providers/OpenAI_ipcidr.yaml"
     path: ./ruleset/openai-ip.yaml
     interval: 86400
 
   claude:
     type: http
     behavior: domain
-    url: "https://fastly.jsdelivr.net/gh/ipevel/stash-rulesets@main/stash/providers/Claude_domain.yaml"
+    url: "https://cdn.jsdelivr.net/gh/ipevel/stash-rulesets@main/stash/providers/Claude_domain.yaml"
     path: ./ruleset/claude.yaml
     interval: 86400
 
   googlegemini:
     type: http
     behavior: domain
-    url: "https://fastly.jsdelivr.net/gh/ipevel/stash-rulesets@main/stash/providers/GoogleGemini_domain.yaml"
+    url: "https://cdn.jsdelivr.net/gh/ipevel/stash-rulesets@main/stash/providers/GoogleGemini_domain.yaml"
     path: ./ruleset/googlegemini.yaml
     interval: 86400
 
@@ -206,35 +206,35 @@ rule-providers:
   proxymedia:
     type: http
     behavior: domain
-    url: "https://fastly.jsdelivr.net/gh/ipevel/stash-rulesets@main/stash/providers/ProxyMedia_domain.yaml"
+    url: "https://cdn.jsdelivr.net/gh/ipevel/stash-rulesets@main/stash/providers/ProxyMedia_domain.yaml"
     path: ./ruleset/proxymedia.yaml
     interval: 86400
 
   proxymedia-ip:
     type: http
     behavior: ipcidr
-    url: "https://fastly.jsdelivr.net/gh/ipevel/stash-rulesets@main/stash/providers/ProxyMedia_ipcidr.yaml"
+    url: "https://cdn.jsdelivr.net/gh/ipevel/stash-rulesets@main/stash/providers/ProxyMedia_ipcidr.yaml"
     path: ./ruleset/proxymedia-ip.yaml
     interval: 86400
 
   tiktok:
     type: http
     behavior: domain
-    url: "https://fastly.jsdelivr.net/gh/ipevel/stash-rulesets@main/stash/providers/TikTok_domain.yaml"
+    url: "https://cdn.jsdelivr.net/gh/ipevel/stash-rulesets@main/stash/providers/TikTok_domain.yaml"
     path: ./ruleset/tiktok.yaml
     interval: 86400
 
   instagram:
     type: http
     behavior: domain
-    url: "https://fastly.jsdelivr.net/gh/ipevel/stash-rulesets@main/stash/providers/Instagram_domain.yaml"
+    url: "https://cdn.jsdelivr.net/gh/ipevel/stash-rulesets@main/stash/providers/Instagram_domain.yaml"
     path: ./ruleset/instagram.yaml
     interval: 86400
 
   netflix:
     type: http
     behavior: domain
-    url: "https://fastly.jsdelivr.net/gh/ipevel/stash-rulesets@main/stash/providers/Netflix_domain.yaml"
+    url: "https://cdn.jsdelivr.net/gh/ipevel/stash-rulesets@main/stash/providers/Netflix_domain.yaml"
     path: ./ruleset/netflix.yaml
     interval: 86400
 
@@ -242,63 +242,63 @@ rule-providers:
   google:
     type: http
     behavior: domain
-    url: "https://fastly.jsdelivr.net/gh/ipevel/stash-rulesets@main/stash/providers/Google_domain.yaml"
+    url: "https://cdn.jsdelivr.net/gh/ipevel/stash-rulesets@main/stash/providers/Google_domain.yaml"
     path: ./ruleset/google.yaml
     interval: 86400
 
   google-ip:
     type: http
     behavior: ipcidr
-    url: "https://fastly.jsdelivr.net/gh/ipevel/stash-rulesets@main/stash/providers/Google_ipcidr.yaml"
+    url: "https://cdn.jsdelivr.net/gh/ipevel/stash-rulesets@main/stash/providers/Google_ipcidr.yaml"
     path: ./ruleset/google-ip.yaml
     interval: 86400
 
   googlefcm:
     type: http
     behavior: domain
-    url: "https://fastly.jsdelivr.net/gh/ipevel/stash-rulesets@main/stash/providers/GoogleFCM_domain.yaml"
+    url: "https://cdn.jsdelivr.net/gh/ipevel/stash-rulesets@main/stash/providers/GoogleFCM_domain.yaml"
     path: ./ruleset/googlefcm.yaml
     interval: 86400
 
   googlefcm-ip:
     type: http
     behavior: ipcidr
-    url: "https://fastly.jsdelivr.net/gh/ipevel/stash-rulesets@main/stash/providers/GoogleFCM_ipcidr.yaml"
+    url: "https://cdn.jsdelivr.net/gh/ipevel/stash-rulesets@main/stash/providers/GoogleFCM_ipcidr.yaml"
     path: ./ruleset/googlefcm-ip.yaml
     interval: 86400
 
   apple:
     type: http
     behavior: ipcidr
-    url: "https://fastly.jsdelivr.net/gh/ipevel/stash-rulesets@main/stash/providers/Apple_ipcidr.yaml"
+    url: "https://cdn.jsdelivr.net/gh/ipevel/stash-rulesets@main/stash/providers/Apple_ipcidr.yaml"
     path: ./ruleset/apple.yaml
     interval: 86400
 
   github:
     type: http
     behavior: domain
-    url: "https://fastly.jsdelivr.net/gh/ipevel/stash-rulesets@main/stash/providers/GitHub_domain.yaml"
+    url: "https://cdn.jsdelivr.net/gh/ipevel/stash-rulesets@main/stash/providers/GitHub_domain.yaml"
     path: ./ruleset/github.yaml
     interval: 86400
 
   bing:
     type: http
     behavior: domain
-    url: "https://fastly.jsdelivr.net/gh/ipevel/stash-rulesets@main/stash/providers/Bing_domain.yaml"
+    url: "https://cdn.jsdelivr.net/gh/ipevel/stash-rulesets@main/stash/providers/Bing_domain.yaml"
     path: ./ruleset/bing.yaml
     interval: 86400
 
   onedrive:
     type: http
     behavior: domain
-    url: "https://fastly.jsdelivr.net/gh/ipevel/stash-rulesets@main/stash/providers/OneDrive_domain.yaml"
+    url: "https://cdn.jsdelivr.net/gh/ipevel/stash-rulesets@main/stash/providers/OneDrive_domain.yaml"
     path: ./ruleset/onedrive.yaml
     interval: 86400
 
   microsoft:
     type: http
     behavior: domain
-    url: "https://fastly.jsdelivr.net/gh/ipevel/stash-rulesets@main/stash/providers/Microsoft_domain.yaml"
+    url: "https://cdn.jsdelivr.net/gh/ipevel/stash-rulesets@main/stash/providers/Microsoft_domain.yaml"
     path: ./ruleset/microsoft.yaml
     interval: 86400
 
@@ -306,14 +306,14 @@ rule-providers:
   chinadomain:
     type: http
     behavior: domain
-    url: "https://fastly.jsdelivr.net/gh/ipevel/stash-rulesets@main/stash/providers/ChinaDomain_domain.yaml"
+    url: "https://cdn.jsdelivr.net/gh/ipevel/stash-rulesets@main/stash/providers/ChinaDomain_domain.yaml"
     path: ./ruleset/chinadomain.yaml
     interval: 86400
 
   chinaip:
     type: http
     behavior: ipcidr
-    url: "https://fastly.jsdelivr.net/gh/ipevel/stash-rulesets@main/stash/providers/ChinaIp_ipcidr.yaml"
+    url: "https://cdn.jsdelivr.net/gh/ipevel/stash-rulesets@main/stash/providers/ChinaIp_ipcidr.yaml"
     path: ./ruleset/chinaip.yaml
     interval: 86400
 
@@ -321,28 +321,28 @@ rule-providers:
   telegram:
     type: http
     behavior: domain
-    url: "https://fastly.jsdelivr.net/gh/ipevel/stash-rulesets@main/stash/providers/Telegram_domain.yaml"
+    url: "https://cdn.jsdelivr.net/gh/ipevel/stash-rulesets@main/stash/providers/Telegram_domain.yaml"
     path: ./ruleset/telegram.yaml
     interval: 86400
 
   telegram-ip:
     type: http
     behavior: ipcidr
-    url: "https://fastly.jsdelivr.net/gh/ipevel/stash-rulesets@main/stash/providers/Telegram_ipcidr.yaml"
+    url: "https://cdn.jsdelivr.net/gh/ipevel/stash-rulesets@main/stash/providers/Telegram_ipcidr.yaml"
     path: ./ruleset/telegram-ip.yaml
     interval: 86400
 
   telegramcidr:
     type: http
     behavior: ipcidr
-    url: "https://fastly.jsdelivr.net/gh/ipevel/stash-rulesets@main/stash/providers/TelegramCIDR_ipcidr.yaml"
+    url: "https://cdn.jsdelivr.net/gh/ipevel/stash-rulesets@main/stash/providers/TelegramCIDR_ipcidr.yaml"
     path: ./ruleset/telegramcidr.yaml
     interval: 86400
 
   gfwlist:
     type: http
     behavior: domain
-    url: "https://fastly.jsdelivr.net/gh/ipevel/stash-rulesets@main/stash/providers/ProxyGFWlist_domain.yaml"
+    url: "https://cdn.jsdelivr.net/gh/ipevel/stash-rulesets@main/stash/providers/ProxyGFWlist_domain.yaml"
     path: ./ruleset/gfwlist.yaml
     interval: 86400
 
@@ -357,19 +357,13 @@ rules:
 
   # === 广告拦截 ===
   - RULE-SET,banad,🛑 全球拦截
-  - RULE-SET,banadcompany,🛑 全球拦截
+  - RULE-SET,banadcompany,🛑 全球拦截,no-resolve
 
   # === AI平台 (内联关键词先匹配, RULE-SET兜底) ===
   - DOMAIN-KEYWORD,openai,💬 Ai平台
   - DOMAIN-KEYWORD,chatgpt,💬 Ai平台
   - DOMAIN-KEYWORD,claude,💬 Ai平台
   - DOMAIN-KEYWORD,anthropic,💬 Ai平台
-  - DOMAIN-KEYWORD,gemini,💬 Ai平台
-  - DOMAIN-SUFFIX,chatgpt.com,💬 Ai平台
-  - DOMAIN-SUFFIX,claude.ai,💬 Ai平台
-  - DOMAIN-SUFFIX,openai.com,💬 Ai平台
-  - DOMAIN-SUFFIX,anthropic.com,💬 Ai平台
-  - DOMAIN-SUFFIX,copilot.microsoft.com,💬 Ai平台
   - RULE-SET,openai,💬 Ai平台
   - RULE-SET,openai-ip,💬 Ai平台,no-resolve
   - RULE-SET,claude,💬 Ai平台
@@ -378,14 +372,9 @@ rules:
   # === 流媒体 (内联关键词先匹配, RULE-SET兜底) ===
   - DOMAIN-KEYWORD,youtube,📹 油管视频
   - DOMAIN-KEYWORD,googlevideo,📹 油管视频
-  - DOMAIN-SUFFIX,youtube.com,📹 油管视频
-  - DOMAIN-SUFFIX,youtu.be,📹 油管视频
   - DOMAIN-KEYWORD,netflix,🎥 奈飞视频
-  - DOMAIN-SUFFIX,nflxvideo.net,🎥 奈飞视频
   - DOMAIN-KEYWORD,tiktok,🏷️ TikTok
-  - DOMAIN-SUFFIX,tiktok.com,🏷️ TikTok
   - DOMAIN-KEYWORD,instagram,📸 Instagram
-  - DOMAIN-SUFFIX,instagram.com,📸 Instagram
   - RULE-SET,proxymedia,📹 油管视频
   - RULE-SET,proxymedia-ip,📹 油管视频,no-resolve
   - RULE-SET,netflix,🎥 奈飞视频
@@ -394,8 +383,6 @@ rules:
 
   # === Telegram ===
   - DOMAIN-KEYWORD,telegram,📲 电报消息
-  - DOMAIN-SUFFIX,t.me,📲 电报消息
-  - DOMAIN-SUFFIX,telegram.org,📲 电报消息
   - RULE-SET,telegram,📲 电报消息
   - RULE-SET,telegram-ip,📲 电报消息,no-resolve
   - RULE-SET,telegramcidr,📲 电报消息,no-resolve
@@ -411,7 +398,6 @@ rules:
 
   # === GitHub ===
   - DOMAIN-KEYWORD,github,🧑‍💻 GitHub
-  - DOMAIN-SUFFIX,github.com,🧑‍💻 GitHub
   - RULE-SET,github,🧑‍💻 GitHub
 
   # === Microsoft ===
@@ -419,39 +405,17 @@ rules:
   - DOMAIN-KEYWORD,1drv,☁️ 微软云盘
   - DOMAIN-KEYWORD,onedrive,☁️ 微软云盘
   - DOMAIN-KEYWORD,skydrive,☁️ 微软云盘
-  - DOMAIN-SUFFIX,livefilestore.com,☁️ 微软云盘
-  - DOMAIN-SUFFIX,oneclient.sfx.ms,☁️ 微软云盘
-  - DOMAIN-SUFFIX,onedrive.com,☁️ 微软云盘
-  - DOMAIN-SUFFIX,onedrive.live.com,☁️ 微软云盘
-  - DOMAIN-SUFFIX,photos.live.com,☁️ 微软云盘
-  - DOMAIN-SUFFIX,sharepoint.com,☁️ 微软云盘
-  - DOMAIN-SUFFIX,sharepointonline.com,☁️ 微软云盘
-  - DOMAIN-SUFFIX,skydrive.wns.windows.com,☁️ 微软云盘
-  - DOMAIN-SUFFIX,spoprod-a.akamaihd.net,☁️ 微软云盘
-  - DOMAIN-SUFFIX,storage.live.com,☁️ 微软云盘
-  - DOMAIN-SUFFIX,storage.msn.com,☁️ 微软云盘
-  - DOMAIN-SUFFIX,microsoftpersonalcontent.com,☁️ 微软云盘
   - RULE-SET,onedrive,☁️ 微软云盘
-  - DOMAIN-SUFFIX,hotmail.com,🖥️ 微软服务
-  - DOMAIN-SUFFIX,live.com,🖥️ 微软服务
-  - DOMAIN-SUFFIX,msn.com,🖥️ 微软服务
-  - DOMAIN-SUFFIX,office.com,🖥️ 微软服务
-  - DOMAIN-SUFFIX,office.net,🖥️ 微软服务
-  - DOMAIN-SUFFIX,microsoft.com,🖥️ 微软服务
-  - DOMAIN-SUFFIX,azure.com,🖥️ 微软服务
-  - DOMAIN-SUFFIX,microsoftonline.com,🖥️ 微软服务
-  - DOMAIN-SUFFIX,windows.net,🖥️ 微软服务
-  - DOMAIN-SUFFIX,bing.com,🖥️ 微软服务
   - RULE-SET,microsoft,🖥️ 微软服务
 
   # === 中国直连 ===
   - RULE-SET,chinadomain,🎯 全球直连
   - RULE-SET,chinaip,🎯 全球直连,no-resolve
-  - DOMAIN-SUFFIX,cn,🎯 全球直连
   - GEOIP,CN,🎯 全球直连
 
   # === GFWlist 兜底 ===
   - RULE-SET,gfwlist,🚀 节点选择
 
   # === 最终兜底 ===
+  - DOMAIN-SUFFIX,cn,🎯 全球直连
   - MATCH,🐟 漏网之鱼
