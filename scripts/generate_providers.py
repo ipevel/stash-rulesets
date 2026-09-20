@@ -84,6 +84,35 @@ def split_items(items):
         # 其他 (PROCESS-NAME 等) 丢弃
     return domains, ipcidrs, keywords
 
+# blackmatrix7 的 China_Domain 把一批微软域名标成「国内直连」，实际在国内不通，
+# 会直接搞挂 Outlook / Office365 / Microsoft Store / Windows Update / Xbox。
+# 这些应由 Microsoft_domain.yaml / OneDrive_domain.yaml（走代理）接管。
+MS_DIRECT_DROP = {
+    "download.microsoft.com",
+    "+.dl.delivery.mp.microsoft.com",
+    "+.hotmail.com",
+    "+.microsoftonline.com",
+    "+.office.com",
+    "+.office.net",
+    "+.office365.com",
+    "+.outlook.com",
+    "+.s-microsoft.com",
+    "+.sharepoint.com",
+    "+.update.microsoft.com",
+    "+.windows.com",
+    "+.windows.net",
+    "+.windowsupdate.com",
+    "+.windowsupdate.microsoft.com",
+    "+.xbox.com",
+    "+.xboxlive.com",
+}
+
+
+def drop_microsoft_direct(domains):
+    """从国内直连列表里剔除微软条目（精确值匹配，不误伤 chinalive.com 等）。"""
+    return [d for d in domains if d not in MS_DIRECT_DROP]
+
+
 def write_provider(fname, entries):
     os.makedirs(OUT_DIR, exist_ok=True)
     path = os.path.join(OUT_DIR, fname)
@@ -96,9 +125,6 @@ def write_provider(fname, entries):
 
 # (url, 输出名, 策略, 是否生成 ipcidr 拆分)
 SOURCES = [
-    # --- 广告 ---
-    (BM7.format(cat="AdvertisingLite", file="AdvertisingLite_Domain.yaml"), "BanAD", "REJECT"),
-    (BM7.format(cat="AdvertisingLite", file="AdvertisingLite.yaml"), "BanADCompany", "REJECT"),
     # --- AI ---
     (BM7.format(cat="OpenAI", file="OpenAI.yaml"), "OpenAI", "Proxy"),
     (BM7.format(cat="Claude", file="Claude.yaml"), "Claude", "Proxy"),
@@ -137,6 +163,8 @@ def main():
             domains, ipcidrs, keywords = split_items(items)
             domains = list(dict.fromkeys(domains))
             ipcidrs = list(dict.fromkeys(ipcidrs))
+            if out == "ChinaDomain":
+                domains = drop_microsoft_direct(domains)
             if domains:
                 total_d += write_provider(f"{out}_domain.yaml", domains)
             if ipcidrs:

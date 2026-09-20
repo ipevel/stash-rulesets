@@ -14,8 +14,7 @@ Stash (iOS/tvOS/macOS) 原生格式规则集,按 [stash.wiki](https://stash.wiki
 ```
 stash/
 ├── providers/          # 规则集文件 (behavior: domain / ipcidr)
-│   ├── BanAD_domain.yaml       # 广告域名 (37692 条)
-│   ├── ChinaDomain_domain.yaml # 国内域名 (3691 条)
+│   ├── ChinaDomain_domain.yaml # 国内域名 (3672 条,微软误标条目已剔除)
 │   ├── ChinaIp_ipcidr.yaml     # 国内 IP (7456 条)
 │   └── ...
 ├── stash-full.yaml     # 完整配置模板 (导入 Stash 后填节点)
@@ -46,8 +45,6 @@ rule-providers:
 
 | 规则集 | 类型 | 策略 | 说明 |
 |---|---|---|---|
-| BanAD_domain | domain | REJECT | 广告拦截 (37692 条) |
-| BanADCompany_ipcidr | ipcidr | REJECT | 广告公司 IP (187 条) |
 | OpenAI_domain / OpenAI_ipcidr | domain+ipcidr | Proxy | OpenAI |
 | Claude_domain | domain | Proxy | Claude |
 | GoogleGemini_domain | domain | Proxy | Gemini |
@@ -67,6 +64,11 @@ rule-providers:
 | Telegram_domain / Telegram_ipcidr | domain+ipcidr | Proxy | Telegram |
 | TelegramCIDR_ipcidr | ipcidr | Proxy | Telegram IP |
 | ProxyGFWlist_domain | domain | Proxy | GFW 列表 |
+
+广告拦截规则集（BanAD_domain / BanADCompany_ipcidr）已于 2026-09-20 移除，不再提供 REJECT 类规则集。
+同时移除了 ChinaDomain 中被 blackmatrix7 误标为「国内直连」的微软条目
+（office.com / outlook.com / office365.com / microsoftonline.com / windows.net / xboxlive.com 等），
+否则这些服务在国内会被拉去直连而打不开。
 
 ## 生成
 

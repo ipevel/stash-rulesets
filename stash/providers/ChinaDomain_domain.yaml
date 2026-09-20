@@ -1,11 +1,10 @@
-# ChinaDomain_domain.yaml - 3691 rules
+# ChinaDomain_domain.yaml - 3674 rules
 payload:
   - analytics.strava.com
   - blzddist1-a.akamaihd.net
   - cdn.angruo.com
   - client.amplifi.com
   - download.jetbrains.com
-  - download.microsoft.com
   - images-cn.ssl-images-amazon.com
   - ip.istatmenus.app
   - kc.kexinshe.com
@@ -1150,7 +1149,6 @@ payload:
   - +.diyiyou.com
   - +.dj99.com
   - +.dl-vip.pcfaster.baidu.co.th
-  - +.dl.delivery.mp.microsoft.com
   - +.dler.cloud
   - +.dlgslb.net
   - +.dlnel.com
@@ -1597,7 +1595,6 @@ payload:
   - +.hongyuanqh.com
   - +.hori-gz.com
   - +.hostbuf.com
-  - +.hotmail.com
   - +.houdao.com
   - +.houyicaiji.com
   - +.houyuantuan.com
@@ -2306,7 +2303,6 @@ payload:
   - +.miaopai.com
   - +.miaostreet.com
   - +.miaozhen.com
-  - +.microsoftonline.com
   - +.midasbuy.com
   - +.miercn.com
   - +.migucloud.com
@@ -2458,9 +2454,6 @@ payload:
   - +.oecd-ilibrary.org
   - +.oeeee.com
   - +.offcn.com
-  - +.office.com
-  - +.office.net
-  - +.office365.com
   - +.officese.com
   - +.oi-wiki.com
   - +.oicq88.com
@@ -2506,7 +2499,6 @@ payload:
   - +.ourbits.club
   - +.ourdvs.com
   - +.ourdvsss.com
-  - +.outlook.com
   - +.ovid.com
   - +.ovscdns.com
   - +.ovscdns.net
@@ -2729,7 +2721,6 @@ payload:
   - +.runoob.com
   - +.runsheng.com
   - +.rzrc114.com
-  - +.s-microsoft.com
   - +.s-reader.com
   - +.sa-brazil-1.myhuaweicloud.com
   - +.saasops.tech
@@ -2780,7 +2771,6 @@ payload:
   - +.shanhaitujian.com
   - +.shanshuihotel.com
   - +.sharejs.com
-  - +.sharepoint.com
   - +.shebiaotm.com
   - +.shelter-china.com
   - +.shelterdome.net
@@ -3202,7 +3192,6 @@ payload:
   - +.upai.com
   - +.upaiyun.com
   - +.upcdn.net
-  - +.update.microsoft.com
   - +.upe.net
   - +.upyun.com
   - +.urselect.com
@@ -3319,12 +3308,8 @@ payload:
   - +.win7china.com
   - +.win8.net
   - +.win8china.com
-  - +.windows.com
-  - +.windows.net
   - +.windows10zj.com
   - +.windows7en.com
-  - +.windowsupdate.com
-  - +.windowsupdate.microsoft.com
   - +.windowszj.com
   - +.winegame.net
   - +.winwin7.com
@@ -3372,8 +3357,6 @@ payload:
   - +.xa-bank.com
   - +.xafc.com
   - +.xbiao.com
-  - +.xbox.com
-  - +.xboxlive.com
   - +.xcsc.com
   - +.xdrig.com
   - +.xdwan.com

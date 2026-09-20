@@ -144,12 +144,6 @@ proxy-groups:
       - DIRECT
       - 🚀 节点选择
 
-  - name: 🛑 全球拦截
-    type: select
-    proxies:
-      - REJECT
-      - DIRECT
-
   - name: 🐟 漏网之鱼
     type: select
     proxies:
@@ -158,21 +152,6 @@ proxy-groups:
 
 # --- 规则集定义 ---
 rule-providers:
-  # === 广告 ===
-  banad:
-    type: http
-    behavior: domain
-    url: "https://cdn.jsdelivr.net/gh/ipevel/stash-rulesets@main/stash/providers/BanAD_domain.yaml"
-    path: ./ruleset/banad.yaml
-    interval: 86400
-
-  banadcompany:
-    type: http
-    behavior: ipcidr
-    url: "https://cdn.jsdelivr.net/gh/ipevel/stash-rulesets@main/stash/providers/BanADCompany_ipcidr.yaml"
-    path: ./ruleset/banadcompany.yaml
-    interval: 86400
-
   # === AI ===
   openai:
     type: http
@@ -355,10 +334,6 @@ rules:
   - IP-CIDR,10.0.0.0/8,🎯 全球直连,no-resolve
   - IP-CIDR,172.16.0.0/12,🎯 全球直连,no-resolve
 
-  # === 广告拦截 ===
-  - RULE-SET,banad,🛑 全球拦截
-  - RULE-SET,banadcompany,🛑 全球拦截,no-resolve
-
   # === AI平台 (内联关键词先匹配, RULE-SET兜底) ===
   - DOMAIN-KEYWORD,openai,💬 Ai平台
   - DOMAIN-KEYWORD,chatgpt,💬 Ai平台
@@ -405,7 +380,22 @@ rules:
   - DOMAIN-KEYWORD,1drv,☁️ 微软云盘
   - DOMAIN-KEYWORD,onedrive,☁️ 微软云盘
   - DOMAIN-KEYWORD,skydrive,☁️ 微软云盘
+  - DOMAIN-SUFFIX,sharepoint.com,☁️ 微软云盘
+  - DOMAIN-SUFFIX,storage.live.com,☁️ 微软云盘
   - RULE-SET,onedrive,☁️ 微软云盘
+  # 内联兜底: 防止 provider 加载失败时 Outlook / Office365 / Store 被拉去直连
+  - DOMAIN-SUFFIX,hotmail.com,🖥️ 微软服务
+  - DOMAIN-SUFFIX,live.com,🖥️ 微软服务
+  - DOMAIN-SUFFIX,msn.com,🖥️ 微软服务
+  - DOMAIN-SUFFIX,office.com,🖥️ 微软服务
+  - DOMAIN-SUFFIX,office.net,🖥️ 微软服务
+  - DOMAIN-SUFFIX,office365.com,🖥️ 微软服务
+  - DOMAIN-SUFFIX,microsoft.com,🖥️ 微软服务
+  - DOMAIN-SUFFIX,azure.com,🖥️ 微软服务
+  - DOMAIN-SUFFIX,microsoftonline.com,🖥️ 微软服务
+  - DOMAIN-SUFFIX,windows.com,🖥️ 微软服务
+  - DOMAIN-SUFFIX,windows.net,🖥️ 微软服务
+  - DOMAIN-SUFFIX,bing.com,🖥️ 微软服务
   - RULE-SET,microsoft,🖥️ 微软服务
 
   # === 中国直连 ===
