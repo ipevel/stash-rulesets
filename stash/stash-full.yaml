@@ -122,20 +122,20 @@ proxy-groups:
   - name: 🔎 微软 Bing
     type: select
     proxies:
-      - 🚀 节点选择
       - 🎯 全球直连
+      - 🚀 节点选择
 
   - name: ☁️ 微软云盘
     type: select
     proxies:
-      - 🚀 节点选择
       - 🎯 全球直连
+      - 🚀 节点选择
 
   - name: 🖥️ 微软服务
     type: select
     proxies:
-      - 🚀 节点选择
       - 🎯 全球直连
+      - 🚀 节点选择
 
   # --- 工具分组 ---
   - name: 🎯 全球直连

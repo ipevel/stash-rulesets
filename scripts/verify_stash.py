@@ -101,6 +101,67 @@ if orphan:
 else:
     print("  OK 全部 provider 文件都被引用")
 
+def strip_prefix(s):
+    """去掉行首的 emoji / 变体选择符 / 空白，用于抓 '全球直连' vs '🎯 全球直连' 这类错配"""
+    return re.sub(r"^[\U0001F000-\U0001FAFF️‍\s]+", "", s).strip()
+
+
+# ---- 策略组成员名引用校验 ----
+# 踩过的坑：成员写成 '全球直连' 而真实组名是 '🎯 全球直连'，mihomo 找不到该组会
+# 顺延到列表里下一个真实节点，导致"改了默认出站却毫无效果"。
+groups, members_of = [], {}
+cur_grp = None
+in_proxy_groups = False
+for ln in lines:
+    if ln.startswith("proxy-groups:"):
+        in_proxy_groups = True
+        continue
+    if in_proxy_groups and ln and not ln.startswith(" ") and not ln.startswith("#"):
+        break
+    m = re.match(r"^  - name:\s*(.+)$", ln)
+    if m and in_proxy_groups:
+        cur_grp = m.group(1).strip().strip("'\"")
+        groups.append(cur_grp)
+        members_of[cur_grp] = []
+        continue
+    mm = re.match(r"^      - (.+)$", ln)
+    if mm and cur_grp:
+        members_of[cur_grp].append(mm.group(1).strip().strip("'\""))
+
+BUILTIN = {"DIRECT", "REJECT", "GLOBAL", "PASS"}
+gset = set(groups)
+
+print()
+print("=" * 74)
+print("策略组成员名校验")
+print("=" * 74)
+print("  分组数: %d" % len(groups))
+wrong = []
+unknown = []
+for g in groups:
+    for mem in members_of[g]:
+        if mem in gset or mem in BUILTIN:
+            continue
+        core = strip_prefix(mem)
+        near = [x for x in gset if strip_prefix(x) == core]
+        if near:
+            wrong.append((g, mem, near[0]))
+        else:
+            unknown.append((g, mem))
+
+if wrong:
+    ok = False
+    print("  !! 成员名与组名只差 emoji 前缀（引用必失败）:")
+    for g, mem, real in wrong:
+        print("     [%s] 引用「%s」，实际组名是「%s」" % (g, mem, real))
+else:
+    print("  OK 无 emoji 前缀错配")
+
+if unknown:
+    print("  (信息) 以下成员非本文件定义的组，由客户端节点列表提供，需人工确认:")
+    for g, mem in unknown[:15]:
+        print("     [%s] -> %s" % (g, mem))
+
 print()
 print("=" * 74)
 print("结论:", "全部通过 ✓" if ok else "有问题 ✗")
