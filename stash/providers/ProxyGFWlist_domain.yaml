@@ -1,4 +1,4 @@
-# ProxyGFWlist_domain.yaml - 4384 rules
+# ProxyGFWlist_domain.yaml - 4386 rules
 payload:
   - +.000webhost.com
   - +.0rz.tw
@@ -756,6 +756,7 @@ payload:
   - +.chinesegay.org
   - +.chinesen.de
   - +.chinesenews.net.au
+  - +.chineseposters.net
   - +.chineseradioseattle.com
   - +.chineseupress.com
   - +.chingcheong.com
@@ -2678,6 +2679,7 @@ payload:
   - +.nordstromrack.com
   - +.nordvpn.com
   - +.nos.nl
+  - +.note.com
   - +.notepad-plus-plus.org
   - +.nottinghampost.com
   - +.now.com
