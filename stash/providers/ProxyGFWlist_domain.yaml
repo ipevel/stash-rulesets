@@ -1,4 +1,4 @@
-# ProxyGFWlist_domain.yaml - 4389 rules
+# ProxyGFWlist_domain.yaml - 4391 rules
 payload:
   - +.000webhost.com
   - +.0rz.tw
@@ -1397,6 +1397,7 @@ payload:
   - +.futustatic.com
   - +.fututrade.com
   - +.fututrustee.com
+  - +.fuyin116.com
   - +.fw.cm
   - +.fxcm-chinese.com
   - +.fxnetworks.com
@@ -2551,6 +2552,7 @@ payload:
   - +.mubi.com
   - +.mullvad.net
   - +.multiply.com
+  - +.muse.ai
   - +.music.amazon.com
   - +.musixmatch.com
   - +.muzi.com
