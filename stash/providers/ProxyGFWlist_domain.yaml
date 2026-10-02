@@ -1,4 +1,4 @@
-# ProxyGFWlist_domain.yaml - 4391 rules
+# ProxyGFWlist_domain.yaml - 4392 rules
 payload:
   - +.000webhost.com
   - +.0rz.tw
@@ -4009,6 +4009,7 @@ payload:
   - +.wainao.me
   - +.walletconnect.com
   - +.walletconnect.org
+  - +.wallhaven.cc
   - +.wallmama.com
   - +.wallpapercasa.com
   - +.wallsttv.com
