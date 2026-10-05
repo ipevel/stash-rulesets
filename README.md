@@ -15,7 +15,7 @@ Stash (iOS/tvOS/macOS) 原生格式规则集,按 [stash.wiki](https://stash.wiki
 stash/
 ├── providers/          # 规则集文件 (behavior: domain / ipcidr)
 │   ├── ChinaDomain_domain.yaml # 国内域名 (3672 条,微软误标条目已剔除)
-│   ├── ChinaIp_ipcidr.yaml     # 国内 IP (7456 条)
+│   ├── ChinaIp_ipcidr.yaml     # 国内 IP (9647 条)
 │   └── ...
 ├── stash-full.yaml     # 完整配置模板 (导入 Stash 后填节点)
 └── keywords.json       # DOMAIN-KEYWORD 清单 (主配置内联用)
