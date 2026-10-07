@@ -1,4 +1,4 @@
-# ProxyGFWlist_domain.yaml - 4393 rules
+# ProxyGFWlist_domain.yaml - 4429 rules
 payload:
   - +.000webhost.com
   - +.0rz.tw
@@ -132,6 +132,7 @@ payload:
   - +.agro.hk
   - +.ai.dev
   - +.ai.studio
+  - +.aidc.com.tw
   - +.aihub.top
   - +.aiosearch.com
   - +.aiph.net
@@ -530,6 +531,7 @@ payload:
   - +.bloombergview.com
   - +.bloomfortune.com
   - +.blubrry.com
+  - +.blue-plus.net
   - +.bmdru.com
   - +.bnbstatic.com
   - +.bnext.com.tw
@@ -552,6 +554,7 @@ payload:
   - +.boxpn.com
   - +.boxun.com
   - +.boxun.tv
+  - +.boylove.cc
   - +.boysmaster.com
   - +.br.st
   - +.braumeister.org
@@ -628,6 +631,7 @@ payload:
   - +.campaign-archive.com
   - +.campaignforuyghurs.org
   - +.cams.com
+  - +.cangku.moe
   - +.canva.com
   - +.canyu.org
   - +.caobian.info
@@ -871,6 +875,7 @@ payload:
   - +.coursehero.com
   - +.covenantswatch.org.tw
   - +.coze.com
+  - +.cpc.com.tw
   - +.cpj.org
   - +.cpu-monkey.com
   - +.cq99.us
@@ -893,6 +898,7 @@ payload:
   - +.crucial.com
   - +.crunchyroll.com
   - +.cruxpool.com
+  - +.csc.com.tw
   - +.csdparty.com
   - +.csis.org
   - +.csmonitor.com
@@ -982,6 +988,7 @@ payload:
   - +.devio.us
   - +.devpn.com
   - +.devv.ai
+  - +.dh.net
   - +.diaoyuislands.org
   - +.digiland.tw
   - +.digisfera.com
@@ -1168,6 +1175,7 @@ payload:
   - +.evschool.net
   - +.exchristian.hk
   - +.exhentai.org
+  - +.eximbank.com.tw
   - +.exmo.com
   - +.exmormon.org
   - +.expatshield.com
@@ -1821,7 +1829,9 @@ payload:
   - +.hakkatv.org.tw
   - +.halktv.com.tr
   - +.hanime.tv
+  - +.hanime1.com
   - +.hanime1.me
+  - +.hanimeone.me
   - +.hardsextube.com
   - +.hautelook.com
   - +.hautelookcdn.com
@@ -1844,6 +1854,7 @@ payload:
   - +.helpster.de
   - +.hembed.com
   - +.hentai.tv
+  - +.hentaiclub.net
   - +.heqinglian.net
   - +.heritage.org
   - +.herokuapp.com
@@ -1989,6 +2000,7 @@ payload:
   - +.iask.ca
   - +.iavian.net
   - +.ibvpn.com
+  - +.icdf.org.tw
   - +.icedrive.net
   - +.icij.org
   - +.icl-fi.org
@@ -2046,6 +2058,7 @@ payload:
   - +.indiandefensenews.in
   - +.indiatoday.in
   - +.indiemerch.com
+  - +.indsr.org.tw
   - +.inews-api.tvb.com
   - +.info-graf.fr
   - +.infosec.exchange
@@ -2072,6 +2085,7 @@ payload:
   - +.investing.com
   - +.invidio.us
   - +.inxian.com
+  - +.ipac.global
   - +.ipdefenseforum.com
   - +.ipfire.org
   - +.ipfs.4everland.io
@@ -2130,9 +2144,11 @@ payload:
   - +.jav321.com
   - +.javakiba.org
   - +.javbus.com
+  - +.javchu.com
   - +.javdb.com
   - +.javfinder.ai
   - +.javfor.me
+  - +.javfree.me
   - +.javhub.net
   - +.javhuge.com
   - +.javlibrary.com
@@ -2154,6 +2170,7 @@ payload:
   - +.jinx.com
   - +.jitouch.com
   - +.jkb.cc
+  - +.jkforum.net
   - +.jma.go.jp
   - +.jmsc.hku.hk
   - +.jmscult.com
@@ -2201,6 +2218,7 @@ payload:
   - +.keycdn.com
   - +.kfor.com
   - +.khatrimaza.org
+  - +.khc.edu.tw
   - +.kichiku-doujinko.com
   - +.kik.com
   - +.killwall.com
@@ -2246,6 +2264,7 @@ payload:
   - +.lama.com.tw
   - +.lamayeshe.com
   - +.lamnia.co.uk
+  - +.landbank.com.tw
   - +.landofhope.tv
   - +.lantern.io
   - +.laogai.org
@@ -2399,6 +2418,7 @@ payload:
   - +.mastodon.xyz
   - +.matainja.com
   - +.material.io
+  - +.matichon.co.th
   - +.matome-plus.com
   - +.matome-plus.net
   - +.matrix.org
@@ -2484,11 +2504,14 @@ payload:
   - +.ministrybooks.org
   - +.minzhuzhongguo.org
   - +.miraheze.org
+  - +.mirdc.org.tw
   - +.miroguide.com
   - +.mirror.xyz
   - +.mirrorbooks.com
   - +.mirrormedia.mg
+  - +.missav.ai
   - +.missav.com
+  - +.missav.live
   - +.missav.ws
   - +.mistral.ai
   - +.mitbbs.com
@@ -2512,6 +2535,7 @@ payload:
   - +.mod.io
   - +.modernchinastudies.org
   - +.moeerolibrary.com
+  - +.moeli-desu.com
   - +.moeshare.cc
   - +.mog.com
   - +.mohu.club
@@ -2591,6 +2615,7 @@ payload:
   - +.nationalawakening.org
   - +.nationalinterest.org
   - +.nationalreview.com
+  - +.nationthailand.com
   - +.nationwide.com
   - +.naughtyamerica.com
   - +.naver.com
@@ -2602,6 +2627,7 @@ payload:
   - +.nchrd.org
   - +.ncn.org
   - +.ndi.org
+  - +.ned.org
   - +.nekoslovakia.net
   - +.neo-miracle.com
   - +.neodb.social
@@ -2693,6 +2719,7 @@ payload:
   - +.npsboost.com
   - +.nradio.me
   - +.nrk.no
+  - +.nstc.org.tw
   - +.ntd.tv
   - +.ntdtv.com
   - +.ntdtv.com.tw
@@ -2931,6 +2958,7 @@ payload:
   - +.points-media.com
   - +.pokerstars.com
   - +.pokerstars.net
+  - +.poland.tw
   - +.politicalchina.org
   - +.poloniex.com
   - +.polymarket.com
@@ -3026,6 +3054,7 @@ payload:
   - +.qiangwaikan.com
   - +.qiangyou.org
   - +.qianmo.tw
+  - +.qingse.one
   - +.qiwen.lu
   - +.qmp4.com
   - +.qobuz.com
@@ -3128,6 +3157,7 @@ payload:
   - +.rocket-inc.net
   - +.rocket.chat
   - +.rocksdb.org
+  - +.rocmgov.org
   - +.rojo.com
   - +.rolfoundation.org
   - +.rolia.net
@@ -3526,6 +3556,7 @@ payload:
   - +.textnow.com
   - +.textnow.me
   - +.tfc-taiwan.org.tw
+  - +.tfd.org.tw
   - +.tfhub.dev
   - +.tfiflve.com
   - +.tg-me.com
@@ -3719,6 +3750,7 @@ payload:
   - +.tryheart.jp
   - +.tsdr.uspto.gov
   - +.tt1069.com
+  - +.ttl.com.tw
   - +.tttan.com
   - +.ttv.com.tw
   - +.ttvnw.net
@@ -3771,6 +3803,7 @@ payload:
   - +.tweez.net
   - +.twelve.today
   - +.twerkingbutt.com
+  - +.twfhcsec.com.tw
   - +.twftp.org
   - +.twgov.tw
   - +.twgreatdaily.com
@@ -3813,6 +3846,7 @@ payload:
   - +.twtkr.com
   - +.twttr.com
   - +.tx.me
+  - +.tybio.com.tw
   - +.tycool.com
   - +.typepad.com
   - +.typeset.io
@@ -4002,6 +4036,7 @@ payload:
   - +.vrchat.com
   - +.vrporn.com
   - +.vrsmash.com
+  - +.vscc.org.tw
   - +.vtunnel.com
   - +.vultryhw.com
   - +.w-pool.com
@@ -4261,6 +4296,7 @@ payload:
   - +.xvideos.com
   - +.xvideos.es
   - +.xvinlink.com
+  - +.xx.net
   - +.xxx.com
   - +.xxx.xxx
   - +.xxxx.com.au
