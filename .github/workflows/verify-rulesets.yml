@@ -1,0 +1,37 @@
+name: verify-rulesets
+
+# PR 门禁：只跑仓库自带的校验脚本，**不生成、不提交、不推送**。
+# 日更（daily-rule-update.yml）继续走 schedule 直推 main，本 workflow 不参与那条链路。
+#
+# 为什么单独一个文件而不是塞进 daily-rule-update.yml：
+#   日更那份 workflow 的步骤会 generate + commit + push，绝不能挂在 pull_request 上。
+#   拆开之后，PR 上只会出现这一个只读校验 job，职责边界清楚。
+on:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: verify-rulesets-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    name: 规则集校验
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: 检出
+        uses: actions/checkout@v4
+
+      - name: Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      # behavior 与 _domain/_ipcidr 后缀是否匹配、provider 文件是否存在、
+      # RULE-SET 引用是否都有定义、广告拦截残留、孤儿文件、组名 emoji 前缀错配。
+      - name: provider / 引用 / 残留 / 组名校验
+        run: python3 scripts/verify_stash.py
