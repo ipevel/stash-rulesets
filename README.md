@@ -7,7 +7,8 @@ Stash (iOS/tvOS/macOS) 原生格式规则集,按 [stash.wiki](https://stash.wiki
 - **Stash 原生格式**: 规则集用 `behavior: domain` / `behavior: ipcidr`(Stash 官方推荐的优化格式,内存占用低、匹配快)
 - **不生成 classical**: Stash 官方明确不推荐 classical(顺序匹配,性能差)
 - **DOMAIN-KEYWORD 内联**: Stash domain 规则集不支持关键词语义,KEYWORD 规则放在主配置内联
-- **自动更新**: GitHub Actions 每天 UTC 02:00 从上游拉取最新规则
+- **自动更新**: GitHub Actions 按 `cron: 0 2 * * *`(UTC 02:00 = 北京 10:00)从上游拉取最新规则
+  - 实际触发时刻常有 5–7 小时漂移(近期落在 06:00–09:00 UTC),属 GitHub Actions 排队延迟,不是故障;判定日更是否正常请读 Actions 的 run 记录
 
 ## 目录结构
 

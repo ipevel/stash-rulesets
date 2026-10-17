@@ -1,0 +1,11 @@
+# 统一行尾为 LF：本仓库会在 Windows 与 Linux 两侧检出/生成，
+# 行尾漂移会让 provider 文件出现整文件级 diff，掩盖真正的规则改动。
+* text=auto eol=lf
+
+# 手工脚本与文档：明确 LF
+*.py   text eol=lf
+*.sh   text eol=lf
+*.yaml text eol=lf
+*.yml  text eol=lf
+*.md   text eol=lf
+*.json text eol=lf
