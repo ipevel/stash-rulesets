@@ -57,6 +57,15 @@ jobs:
           print("YAML validation:", "OK" if ok else "FAILED")
           sys.exit(0 if ok else 1)
 
+      # 推送前自校验：与 PR 上的「规则集校验」跑同一个脚本。
+      # 上游规则坏了 / 生成逻辑出偏差时，这一步直接红 → 下面的 commit+push 根本不执行，
+      # 坏规则不会进 main。
+      # 为什么放在这里而不是靠 ruleset 硬拦：本仓是个人账号仓库，GitHub 不允许把
+      # Actions app 加进 ruleset 的 bypass 列表，而 required check 会连本步的直推一起挡
+      # （实测 GH013）。所以改为在推送源头自校验 + PR 侧读回「规则集校验」。
+      - name: 规则集自校验（provider 存在性 / RULE-SET 引用 / 广告残留 / 组名）
+        run: python3 scripts/verify_stash.py
+
       - name: Commit and push if changed
         if: github.ref == 'refs/heads/main'
         run: |
