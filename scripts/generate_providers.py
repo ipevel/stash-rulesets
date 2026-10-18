@@ -26,12 +26,29 @@ TEMPLATE = os.path.join(BASE, "stash", "stash-full.yaml")
 
 BM7 = "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/{cat}/{file}"
 LOYO = "https://raw.githubusercontent.com/Loyalsoldier/clash-rules/release/{file}"
+# polaris-rules 合并后的 AI 清单（ACL4SSR 的 AI/OpenAi/ClaudeAI/Gemini 四份合并去重），
+# 覆盖 OpenAI / Claude / Gemini / Groq / Perplexity / Mistral / Meta AI / xAI / Cursor /
+# JetBrains / GitHub·Microsoft Copilot 等，比本仓原本只拉 OpenAI/Claude/Gemini 三份更全。
+POLARIS_AI = "https://raw.githubusercontent.com/ipevel/polaris-rules/main/dist/rules/ai.list"
 UA = {"User-Agent": "Mozilla/5.0 (stash-rulesets-updater)"}
 
 def fetch(url):
     req = urllib.request.Request(url, headers=UA)
     with urllib.request.urlopen(req, timeout=90) as r:
         return r.read().decode("utf-8", "replace")
+
+def parse_list(text):
+    """提取纯文本规则列表（每行一条，无 payload: 包裹）。
+
+    polaris-rules 的 dist/rules/*.list 就是这种格式：一行一条 Clash 规则行。
+    """
+    items = []
+    for line in text.splitlines():
+        s = line.strip()
+        if not s or s.startswith("#"):
+            continue
+        items.append(s)
+    return items
 
 def parse_payload(text):
     items = []
@@ -123,12 +140,14 @@ def write_provider(fname, entries):
             f.write(f"  - {e}\n")
     return len(entries)
 
-# (url, 输出名, 策略, 是否生成 ipcidr 拆分)
+# (url, 输出名, 策略[, 源格式])  —— 源格式缺省为 payload，可选 "list"（纯文本规则列表）
 SOURCES = [
     # --- AI ---
     (BM7.format(cat="OpenAI", file="OpenAI.yaml"), "OpenAI", "Proxy"),
     (BM7.format(cat="Claude", file="Claude.yaml"), "Claude", "Proxy"),
     (BM7.format(cat="Gemini", file="Gemini.yaml"), "GoogleGemini", "Proxy"),
+    # 合并 AI 清单（来自 polaris-rules），作为 AI 平台的兜底：单条 RULE-SET 覆盖全部 AI 服务。
+    (POLARIS_AI, "AI", "Proxy", "list"),
     # --- 流媒体 & 社交 ---
     (BM7.format(cat="YouTube", file="YouTube.yaml"), "ProxyMedia", "Proxy"),
     (BM7.format(cat="TikTok", file="TikTok.yaml"), "TikTok", "Proxy"),
@@ -156,10 +175,15 @@ def main():
     results = []
     total_d = total_i = total_k = 0
     all_keywords = {}  # provider -> [keywords]
-    for url, out, policy in SOURCES:
+    for src in SOURCES:
+        url, out, policy = src[0], src[1], src[2]
+        fmt = src[3] if len(src) > 3 else "payload"
         try:
             text = fetch(url)
-            items = parse_payload(text)
+            if fmt == "list":
+                items = parse_list(text)
+            else:
+                items = parse_payload(text)
             domains, ipcidrs, keywords = split_items(items)
             domains = list(dict.fromkeys(domains))
             ipcidrs = list(dict.fromkeys(ipcidrs))

@@ -7,6 +7,14 @@
   "developerprofiles",
   "generativelanguage"
  ],
+ "AI": [
+  "anthropic",
+  "claude",
+  "openai",
+  "colab",
+  "developerprofiles",
+  "generativelanguage"
+ ],
  "ProxyMedia": [
   "youtube"
  ],

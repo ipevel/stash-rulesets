@@ -181,6 +181,14 @@ rule-providers:
     path: ./ruleset/googlegemini.yaml
     interval: 86400
 
+  # 合并 AI 清单（OpenAI/Claude/Gemini 之外再兜住 Groq/Perplexity/Mistral/Meta AI/xAI/Cursor/JetBrains/Copilot 等）
+  ai:
+    type: http
+    behavior: domain
+    url: "https://cdn.jsdelivr.net/gh/ipevel/stash-rulesets@main/stash/providers/AI_domain.yaml"
+    path: ./ruleset/ai.yaml
+    interval: 86400
+
   # === 流媒体 & 社交 ===
   proxymedia:
     type: http
@@ -339,10 +347,14 @@ rules:
   - DOMAIN-KEYWORD,chatgpt,💬 Ai平台
   - DOMAIN-KEYWORD,claude,💬 Ai平台
   - DOMAIN-KEYWORD,anthropic,💬 Ai平台
+  - DOMAIN-KEYWORD,colab,💬 Ai平台
+  - DOMAIN-KEYWORD,developerprofiles,💬 Ai平台
+  - DOMAIN-KEYWORD,generativelanguage,💬 Ai平台
   - RULE-SET,openai,💬 Ai平台
   - RULE-SET,openai-ip,💬 Ai平台,no-resolve
   - RULE-SET,claude,💬 Ai平台
   - RULE-SET,googlegemini,💬 Ai平台
+  - RULE-SET,ai,💬 Ai平台
 
   # === 流媒体 (内联关键词先匹配, RULE-SET兜底) ===
   - DOMAIN-KEYWORD,youtube,📹 油管视频
