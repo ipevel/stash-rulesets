@@ -71,7 +71,15 @@ proxy-groups:
       - 🚀 节点选择
       - 🎯 全球直连
 
-  - name: 📹 油管视频
+  # 社交：Instagram / Twitter / Facebook / Whatsapp / Discord / Reddit
+  - name: 📱 社交
+    type: select
+    proxies:
+      - 🚀 节点选择
+      - 🎯 全球直连
+
+  # 流媒体：YouTube / Netflix / Disney+ / HBO Max / Prime Video / Twitch / Spotify
+  - name: 🎬 流媒体
     type: select
     proxies:
       - 🚀 节点选择
@@ -83,25 +91,8 @@ proxy-groups:
       - 🚀 节点选择
       - 🎯 全球直连
 
-  - name: 📸 Instagram
-    type: select
-    proxies:
-      - 🚀 节点选择
-      - 🎯 全球直连
-
-  - name: 🎥 奈飞视频
-    type: select
-    proxies:
-      - 🚀 节点选择
-      - 🎯 全球直连
-
+  # Google：Google + Google FCM 合一
   - name: 🔍 Google
-    type: select
-    proxies:
-      - 🚀 节点选择
-      - 🎯 全球直连
-
-  - name: 🔔 Google FCM
     type: select
     proxies:
       - 🚀 节点选择
@@ -113,7 +104,8 @@ proxy-groups:
       - 🚀 节点选择
       - 🎯 全球直连
 
-  - name: 🧑‍💻 GitHub
+  # 开发者：GitHub / GitLab / Bitbucket / Docker Hub / npmjs / PyPI
+  - name: 💻 开发者
     type: select
     proxies:
       - 🚀 节点选择
@@ -218,11 +210,41 @@ rule-providers:
     path: ./ruleset/instagram.yaml
     interval: 86400
 
+  # 合并社交清单：Twitter / Facebook / Whatsapp / Discord / Reddit
+  social:
+    type: http
+    behavior: domain
+    url: "https://cdn.jsdelivr.net/gh/ipevel/stash-rulesets@main/stash/providers/Social_domain.yaml"
+    path: ./ruleset/social.yaml
+    interval: 86400
+
+  social-ip:
+    type: http
+    behavior: ipcidr
+    url: "https://cdn.jsdelivr.net/gh/ipevel/stash-rulesets@main/stash/providers/Social_ipcidr.yaml"
+    path: ./ruleset/social-ip.yaml
+    interval: 86400
+
   netflix:
     type: http
     behavior: domain
     url: "https://cdn.jsdelivr.net/gh/ipevel/stash-rulesets@main/stash/providers/Netflix_domain.yaml"
     path: ./ruleset/netflix.yaml
+    interval: 86400
+
+  # 合并流媒体清单：Disney+ / HBO Max / Prime Video / Twitch / Spotify
+  streaming:
+    type: http
+    behavior: domain
+    url: "https://cdn.jsdelivr.net/gh/ipevel/stash-rulesets@main/stash/providers/Streaming_domain.yaml"
+    path: ./ruleset/streaming.yaml
+    interval: 86400
+
+  streaming-ip:
+    type: http
+    behavior: ipcidr
+    url: "https://cdn.jsdelivr.net/gh/ipevel/stash-rulesets@main/stash/providers/Streaming_ipcidr.yaml"
+    path: ./ruleset/streaming-ip.yaml
     interval: 86400
 
   # === Google / Apple / GitHub / 微软 ===
@@ -266,6 +288,14 @@ rule-providers:
     behavior: domain
     url: "https://cdn.jsdelivr.net/gh/ipevel/stash-rulesets@main/stash/providers/GitHub_domain.yaml"
     path: ./ruleset/github.yaml
+    interval: 86400
+
+  # 合并开发者清单：GitLab / Docker Hub / npmjs / PyPI（Bitbucket 上游无此分类，走内联规则）
+  dev:
+    type: http
+    behavior: domain
+    url: "https://cdn.jsdelivr.net/gh/ipevel/stash-rulesets@main/stash/providers/Dev_domain.yaml"
+    path: ./ruleset/dev.yaml
     interval: 86400
 
   bing:
@@ -356,17 +386,40 @@ rules:
   - RULE-SET,googlegemini,💬 Ai平台
   - RULE-SET,ai,💬 Ai平台
 
-  # === 流媒体 (内联关键词先匹配, RULE-SET兜底) ===
-  - DOMAIN-KEYWORD,youtube,📹 油管视频
-  - DOMAIN-KEYWORD,googlevideo,📹 油管视频
-  - DOMAIN-KEYWORD,netflix,🎥 奈飞视频
+  # === 社交 (Instagram / Twitter / Facebook / Whatsapp / Discord / Reddit) ===
+  - DOMAIN-KEYWORD,instagram,📱 社交
+  - DOMAIN-KEYWORD,twitter,📱 社交
+  - DOMAIN-KEYWORD,facebook,📱 社交
+  - DOMAIN-KEYWORD,fbcdn,📱 社交
+  - DOMAIN-KEYWORD,whatsapp,📱 社交
+  - DOMAIN-KEYWORD,discord,📱 社交
+  - DOMAIN-KEYWORD,reddit,📱 社交
+  - DOMAIN-SUFFIX,t.co,📱 社交
+  - DOMAIN-SUFFIX,fb.com,📱 社交
+  - RULE-SET,instagram,📱 社交
+  - RULE-SET,social,📱 社交
+  - RULE-SET,social-ip,📱 社交,no-resolve
+
+  # === 流媒体 (YouTube / Netflix / Disney+ / HBO Max / Prime Video / Twitch / Spotify) ===
+  - DOMAIN-KEYWORD,youtube,🎬 流媒体
+  - DOMAIN-KEYWORD,googlevideo,🎬 流媒体
+  - DOMAIN-KEYWORD,netflix,🎬 流媒体
+  - DOMAIN-KEYWORD,disney,🎬 流媒体
+  - DOMAIN-KEYWORD,hbo,🎬 流媒体
+  - DOMAIN-KEYWORD,primevideo,🎬 流媒体
+  - DOMAIN-KEYWORD,twitch,🎬 流媒体
+  - DOMAIN-KEYWORD,spotify,🎬 流媒体
+  - DOMAIN-KEYWORD,avoddashs,🎬 流媒体
+  - DOMAIN-KEYWORD,ttvnw,🎬 流媒体
+  - RULE-SET,proxymedia,🎬 流媒体
+  - RULE-SET,proxymedia-ip,🎬 流媒体,no-resolve
+  - RULE-SET,netflix,🎬 流媒体
+  - RULE-SET,streaming,🎬 流媒体
+  - RULE-SET,streaming-ip,🎬 流媒体,no-resolve
+
+  # === TikTok ===
   - DOMAIN-KEYWORD,tiktok,🏷️ TikTok
-  - DOMAIN-KEYWORD,instagram,📸 Instagram
-  - RULE-SET,proxymedia,📹 油管视频
-  - RULE-SET,proxymedia-ip,📹 油管视频,no-resolve
-  - RULE-SET,netflix,🎥 奈飞视频
   - RULE-SET,tiktok,🏷️ TikTok
-  - RULE-SET,instagram,📸 Instagram
 
   # === Telegram ===
   - DOMAIN-KEYWORD,telegram,📲 电报消息
@@ -374,18 +427,29 @@ rules:
   - RULE-SET,telegram-ip,📲 电报消息,no-resolve
   - RULE-SET,telegramcidr,📲 电报消息,no-resolve
 
-  # === Google ===
+  # === Google (Google + Google FCM 合一) ===
   - RULE-SET,google,🔍 Google
   - RULE-SET,google-ip,🔍 Google,no-resolve
-  - RULE-SET,googlefcm,🔔 Google FCM
-  - RULE-SET,googlefcm-ip,🔔 Google FCM,no-resolve
+  - RULE-SET,googlefcm,🔍 Google
+  - RULE-SET,googlefcm-ip,🔍 Google,no-resolve
 
   # === Apple ===
   - RULE-SET,apple,🍎 苹果服务,no-resolve
 
-  # === GitHub ===
-  - DOMAIN-KEYWORD,github,🧑‍💻 GitHub
-  - RULE-SET,github,🧑‍💻 GitHub
+  # === 开发者 (GitHub / GitLab / Bitbucket / Docker Hub / npmjs / PyPI) ===
+  - DOMAIN-KEYWORD,github,💻 开发者
+  - DOMAIN-SUFFIX,github.com,💻 开发者
+  - DOMAIN-KEYWORD,gitlab,💻 开发者
+  - DOMAIN-KEYWORD,bitbucket,💻 开发者
+  - DOMAIN-SUFFIX,docker.io,💻 开发者
+  - DOMAIN-SUFFIX,docker.com,💻 开发者
+  - DOMAIN-SUFFIX,registry.npmjs.org,💻 开发者
+  - DOMAIN-SUFFIX,npmjs.com,💻 开发者
+  - DOMAIN-SUFFIX,npmjs.org,💻 开发者
+  - DOMAIN-SUFFIX,pypi.org,💻 开发者
+  - DOMAIN-SUFFIX,pythonhosted.org,💻 开发者
+  - RULE-SET,github,💻 开发者
+  - RULE-SET,dev,💻 开发者
 
   # === Microsoft ===
   - RULE-SET,bing,🔎 微软 Bing

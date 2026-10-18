@@ -63,5 +63,17 @@
  ],
  "Telegram": [
   "nicegram"
- ]
+ ],
+ "Social": [
+  "twitter",
+  "facebook",
+  "fbcdn",
+  "whatsapp"
+ ],
+ "Streaming": [
+  "avoddashs",
+  "ttvnw",
+  "spotify"
+ ],
+ "Dev": []
 }

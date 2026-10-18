@@ -130,6 +130,41 @@ def drop_microsoft_direct(domains):
     return [d for d in domains if d not in MS_DIRECT_DROP]
 
 
+# AI 服务普遍依赖的第三方基础设施（登录/支付/人机验证/统计/客服/证书）。
+# 这些域名被 ACL4SSR 和 blackmatrix7 打进了 AI 清单，但它们服务的是**全网大量与 AI 无关的站点**
+# （Intercom 挂在无数网站上、Cloudflare Turnstile、Sentry、Stripe 支付……）。
+# 留在 AI 规则里会劫持非 AI 站点流量。2026-10-19 用户裁定：生成阶段统一剔除。
+# 与 clash-rulesets 的同名名单保持一致。
+AI_INFRA_DROP = {
+    "auth0.com",
+    "client-api.arkoselabs.com",
+    "events.statsigapi.net",
+    "featuregates.org",
+    "identrust.com",
+    "intercom.io",
+    "intercomcdn.com",
+    "challenges.cloudflare.com",
+    "sentry.io",
+    "stripe.com",
+}
+
+# 需要套用 AI_INFRA_DROP 的产出名（4 条 AI 产线）
+AI_PROVIDERS = {"OpenAI", "Claude", "GoogleGemini", "AI"}
+
+
+def drop_ai_infra(domains):
+    """剔除 AI 清单里的第三方基础设施域名。
+
+    Stash domain provider 的条目是裸域名或 '+.域名' 通配，两种都要比对到。
+    """
+    out = []
+    for d in domains:
+        if d.lstrip("+.").strip().lower() in AI_INFRA_DROP:
+            continue
+        out.append(d)
+    return out
+
+
 def write_provider(fname, entries):
     os.makedirs(OUT_DIR, exist_ok=True)
     path = os.path.join(OUT_DIR, fname)
@@ -170,6 +205,32 @@ SOURCES = [
     (LOYO.format(file="telegramcidr.txt"), "TelegramCIDR", "Proxy"),
 ]
 
+# 合并源：把多个上游分类合并成一个 provider（去重），对应模板里的合并分组。
+# 2026-10-19 用户要求社交/流媒体/开发者各自并成一个分组（与 clash-rulesets 同批整改）。
+# 结构：(输出名, [(blackmatrix7 分类, 该分类文件名), ...])
+MERGED_SOURCES = [
+    ("Social", [
+        ("Twitter",  "Twitter.yaml"),
+        ("Facebook", "Facebook.yaml"),
+        ("Whatsapp", "Whatsapp.yaml"),
+        ("Discord",  "Discord.yaml"),
+        ("Reddit",   "Reddit.yaml"),
+    ]),
+    ("Streaming", [
+        ("Disney",     "Disney.yaml"),
+        ("HBO",        "HBO.yaml"),
+        ("PrimeVideo", "PrimeVideo.yaml"),
+        ("Twitch",     "Twitch.yaml"),
+        ("Spotify",    "Spotify.yaml"),
+    ]),
+    ("Dev", [
+        ("GitLab", "GitLab.yaml"),
+        ("Docker", "Docker.yaml"),
+        ("Npmjs",  "Npmjs.yaml"),
+        ("Python", "Python.yaml"),
+    ]),
+]
+
 def main():
     os.makedirs(OUT_DIR, exist_ok=True)
     results = []
@@ -189,6 +250,8 @@ def main():
             ipcidrs = list(dict.fromkeys(ipcidrs))
             if out == "ChinaDomain":
                 domains = drop_microsoft_direct(domains)
+            if out in AI_PROVIDERS:
+                domains = drop_ai_infra(domains)
             if domains:
                 total_d += write_provider(f"{out}_domain.yaml", domains)
             if ipcidrs:
@@ -199,6 +262,33 @@ def main():
             results.append(f"OK   {out:20s} domain={len(domains):6d} ipcidr={len(ipcidrs):5d} kw={len(keywords):4d} ({policy})")
         except Exception as e:
             results.append(f"FAIL {out:20s} {url}: {e}")
+
+    # --- 合并源：多个上游分类合成一个 provider ---
+    for out, cats in MERGED_SOURCES:
+        try:
+            domains, ipcidrs, keywords = [], [], []
+            used = []
+            for cat, fname in cats:
+                url = BM7.format(cat=cat, file=fname)
+                d, i, k = split_items(parse_payload(fetch(url)))
+                used.append(f"{cat}({len(d)})")
+                domains.extend(d)
+                ipcidrs.extend(i)
+                keywords.extend(k)
+            domains = list(dict.fromkeys(domains))
+            ipcidrs = list(dict.fromkeys(ipcidrs))
+            if not domains and not ipcidrs:
+                raise RuntimeError("empty rules")
+            if domains:
+                total_d += write_provider(f"{out}_domain.yaml", domains)
+            if ipcidrs:
+                total_i += write_provider(f"{out}_ipcidr.yaml", ipcidrs)
+            if keywords:
+                all_keywords[out] = list(dict.fromkeys(keywords))
+                total_k += len(keywords)
+            results.append(f"OK   {out:20s} domain={len(domains):6d} ipcidr={len(ipcidrs):5d} kw={len(keywords):4d} <- merged {' + '.join(used)}")
+        except Exception as e:
+            results.append(f"FAIL {out:20s} {e}")
     print("\n".join(results))
     print(f"\nTOTAL: domain={total_d} ipcidr={total_i} keyword={total_k}")
     # 保存 KEYWORD 清单供模板生成用

@@ -1,4 +1,4 @@
-# AI_domain.yaml - 56 rules
+# AI_domain.yaml - 46 rules
 payload:
   - ai.google.dev
   - aistudio.google.com
@@ -14,25 +14,18 @@ payload:
   - sydney.bing.com
   - +.ai.azure.com
   - +.anthropic.com
-  - +.auth0.com
   - +.bard.google.com
   - +.chatgpt.com
   - +.claude.ai
   - +.claude.com
   - +.claudeusercontent.com
-  - +.client-api.arkoselabs.com
   - +.copilot.cloud.microsoft
   - +.copilot.microsoft.com
   - +.cursor.com
   - +.cursor.sh
-  - +.events.statsigapi.net
-  - +.featuregates.org
   - +.gemini.google.com
   - +.grazie.ai
   - +.grazie.aws.intellij.net
-  - +.identrust.com
-  - +.intercom.io
-  - +.intercomcdn.com
   - +.jetbrains.ai
   - +.makersuite.google.com
   - +.meta.ai
@@ -46,9 +39,6 @@ payload:
   - +.perplexity.ai
   - +.sora.com
   - +.x.ai
-  - +.challenges.cloudflare.com
-  - +.sentry.io
-  - +.stripe.com
   - alkalimakersuite-pa.clients6.google.com
   - makersuite.google.com
   - +.deepmind.com
