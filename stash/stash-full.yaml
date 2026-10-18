@@ -334,6 +334,14 @@ rule-providers:
     path: ./ruleset/chinaip.yaml
     interval: 86400
 
+  # 国内 IPv6（ChinaIp 只收 IPv4；从 blackmatrix7 ChinaIPs_IP 全量清单取 IPv6 段）
+  chinaipv6:
+    type: http
+    behavior: ipcidr
+    url: "https://cdn.jsdelivr.net/gh/ipevel/stash-rulesets@main/stash/providers/ChinaIpV6_ipcidr.yaml"
+    path: ./ruleset/chinaipv6.yaml
+    interval: 86400
+
   # === Telegram / GFW ===
   telegram:
     type: http
@@ -477,6 +485,7 @@ rules:
   # === 中国直连 ===
   - RULE-SET,chinadomain,🎯 全球直连
   - RULE-SET,chinaip,🎯 全球直连,no-resolve
+  - RULE-SET,chinaipv6,🎯 全球直连,no-resolve
   - GEOIP,CN,🎯 全球直连
 
   # === GFWlist 兜底 ===

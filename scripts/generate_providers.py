@@ -199,6 +199,10 @@ SOURCES = [
     # --- 国内 (不含游戏平台/哔哩哔哩/网易云音乐) ---
     (BM7.format(cat="China", file="China_Domain.yaml"), "ChinaDomain", "DIRECT"),
     (LOYO.format(file="cncidr.txt"), "ChinaIp", "DIRECT"),
+    # 国内 IPv6：从 blackmatrix7 ChinaIPs_IP 全量清单里只取 IPv6 段（fmt=ipcidr6）。
+    # ChinaIp（cncidr.txt）只有 IPv4，GEOIP,CN 对 IPv6 的覆盖依赖内核 geoip 库，
+    # 这里补一份显式 IPv6 清单作第二道保险，随日更刷新。
+    (BM7.format(cat="ChinaIPs", file="ChinaIPs_IP.yaml"), "ChinaIpV6", "DIRECT", "ipcidr6"),
     # --- Telegram / GFW ---
     (BM7.format(cat="Telegram", file="Telegram.yaml"), "Telegram", "Proxy"),
     (LOYO.format(file="gfw.txt"), "ProxyGFWlist", "Proxy"),
@@ -248,6 +252,8 @@ def main():
             domains, ipcidrs, keywords = split_items(items)
             domains = list(dict.fromkeys(domains))
             ipcidrs = list(dict.fromkeys(ipcidrs))
+            if fmt == "ipcidr6":
+                ipcidrs = [c for c in ipcidrs if ":" in c]
             if out == "ChinaDomain":
                 domains = drop_microsoft_direct(domains)
             if out in AI_PROVIDERS:
