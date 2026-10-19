@@ -146,20 +146,40 @@ AI_INFRA_DROP = {
     "challenges.cloudflare.com",
     "sentry.io",
     "stripe.com",
+    # --- 2026-10-19 全量复查新发现（同样是服务全网非 AI 站的第三方 SaaS）---
+    "algolia.net",                   # 站内搜索 SaaS
+    "api.statsig.com",               # Statsig 埋点
+    "browser-intake-datadoghq.com",  # Datadog 监控采集
+    "static.cloudflareinsights.com", # Cloudflare 访问统计
+    "usefathom.com",                 # 站点统计
+    "livekit.cloud",                 # WebRTC 实时通信平台
+    "launchdarkly.com",              # 功能开关
+    "observeit.net",                 # 终端监控/审计
+    "segment.io",                    # 用户数据管道
 }
 
-# 需要套用 AI_INFRA_DROP 的产出名（4 条 AI 产线）
+# 放错到 AI provider 的 Google 通用域名：不是 AI 服务，应由 🔍 Google 组接管
+# （模板 Google 段有对应内联规则）。apis.google.com 是 Google 全系共用的
+# API JS 加载网关，搜索页等都会拉它，留在 AI 段会让谷歌搜索被提前判成 AI 流量。
+AI_MISPLACED_DROP = {
+    "apis.google.com",
+}
+
+# 需要套用上面两个剔除名单的产出名（4 条 AI 产线）
 AI_PROVIDERS = {"OpenAI", "Claude", "GoogleGemini", "AI"}
 
 
 def drop_ai_infra(domains):
-    """剔除 AI 清单里的第三方基础设施域名。
+    """剔除 AI 清单里的第三方基础设施域名与放错的 Google 通用域名。
 
-    Stash domain provider 的条目是裸域名或 '+.域名' 通配，两种都要比对到。
+    Stash domain provider 的条目是裸域名或 '+.域名' 通配，两种都要比对到；
+    父域匹配：名单写 livekit.cloud 可同时命中 chatgpt.livekit.cloud 等子域。
     """
+    drop = AI_INFRA_DROP | AI_MISPLACED_DROP
     out = []
     for d in domains:
-        if d.lstrip("+.").strip().lower() in AI_INFRA_DROP:
+        v = d.lstrip("+.").strip().lower()
+        if any(v == x or v.endswith("." + x) for x in drop):
             continue
         out.append(d)
     return out

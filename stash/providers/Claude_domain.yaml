@@ -1,5 +1,4 @@
-# Claude_domain.yaml - 3 rules
+# Claude_domain.yaml - 2 rules
 payload:
-  - cdn.usefathom.com
   - +.anthropic.com
   - +.claude.ai

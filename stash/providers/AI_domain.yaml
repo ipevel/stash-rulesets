@@ -1,4 +1,4 @@
-# AI_domain.yaml - 46 rules
+# AI_domain.yaml - 45 rules
 payload:
   - ai.google.dev
   - aistudio.google.com
@@ -45,4 +45,3 @@ payload:
   - +.deepmind.google
   - +.generativeai.google
   - +.proactivebackend-pa.googleapis.com
-  - +.apis.google.com
