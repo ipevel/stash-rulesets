@@ -485,6 +485,21 @@ rules:
   - DOMAIN-SUFFIX,bing.com,🖥️ 微软服务
   - RULE-SET,microsoft,🖥️ 微软服务
 
+  # === PikPak 网盘（Web / API / App / 下载 CDN 全程走 🚀 节点选择）===
+  # 必须放在「中国直连」之前，原因有两条：
+  #   1) 下载 CDN 是 *.sandai.net（与迅雷共用该后缀），而 sandai.net 在 ChinaDomain 里，会被判直连；
+  #   2) 这些 CDN 子域解析到国内 IP（阿里云 / 联通），ChinaIp 与 GEOIP,CN 也会把它们拉去直连。
+  # 用 DOMAIN-KEYWORD,pikpak 一次覆盖全部品牌域名（pikpak.com / mypikpak.com / mypikpak.net /
+  # pikpak.me / pikpak.app / pikpak.org / pikpakapp.com / pikpakdrive.com 及其子域），
+  # 新增品牌域名无需再改；CDN 子域关键词覆盖不到，逐条列出。
+  - DOMAIN-KEYWORD,pikpak,🚀 节点选择
+  - DOMAIN-SUFFIX,dlandroid.rcv.sandai.net,🚀 节点选择
+  - DOMAIN-SUFFIX,hub5idx.v6.shub.sandai.net,🚀 节点选择
+  - DOMAIN-SUFFIX,hub5pn.wap.sandai.net,🚀 节点选择
+  - DOMAIN-SUFFIX,hub5pnc.sandai.net,🚀 节点选择
+  - DOMAIN-SUFFIX,hub5pr.v6.phub.sandai.net,🚀 节点选择
+  - DOMAIN-SUFFIX,hubciddata.sandai.net,🚀 节点选择
+
   # === 中国直连 ===
   - RULE-SET,chinadomain,🎯 全球直连
   - RULE-SET,chinaip,🎯 全球直连,no-resolve
